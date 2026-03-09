@@ -288,20 +288,52 @@ function Search({lang}){
         <span style={{fontSize:13,fontWeight:800,color:C.text}}>{lang==="ko"?"내 항공편 조회":"My Flight Lookup"}</span>
         <span style={{marginLeft:"auto",fontSize:10,color:C.textMuted}}>{lang==="ko"?"Flightradar24 연동":"via Flightradar24"}</span>
       </div>
-      <div style={{padding:14}}>
+      <div style={{padding:14,display:"flex",flexDirection:"column",gap:10}}>
+
+        {/* How-to guide */}
+        <div style={{background:C.accentLight,border:`1px solid ${C.borderMed}`,borderRadius:10,padding:"10px 13px",display:"flex",flexDirection:"column",gap:6}}>
+          <p style={{fontSize:11,fontWeight:800,color:C.accent,margin:0,textTransform:"uppercase",letterSpacing:"0.06em"}}>
+            {lang==="ko"?"✈ 항공편명 찾는 법":"✈ How to find your flight number"}
+          </p>
+          <div style={{display:"flex",flexDirection:"column",gap:4}}>
+            {[
+              lang==="ko"?"① 항공권 or 앱에서 편명 확인 — 예: EK363, QR836, KE957":"① Check your ticket or airline app — e.g. EK363, QR836, KE957",
+              lang==="ko"?"② 항공사 2자리 코드 + 숫자 조합 (EK=에미레이트, QR=카타르, KE=대한항공)":"② Airline 2-letter code + number (EK=Emirates, QR=Qatar, KE=Korean Air)",
+              lang==="ko"?"③ 편명 + 날짜 입력 후 조회 버튼 클릭 → Flightradar24에서 실시간 위치·지연 확인":"③ Enter flight + date → opens Flightradar24 with live position & delay info",
+            ].map((t,i)=>(
+              <p key={i} style={{fontSize:12,color:C.textSub,margin:0,lineHeight:1.55}}>{t}</p>
+            ))}
+          </div>
+        </div>
+
+        {/* Example chips */}
+        <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
+          <span style={{fontSize:10,color:C.textMuted,fontWeight:700}}>{lang==="ko"?"예시:":"e.g."}</span>
+          {["EK363","QR836","KE957","TK12","LH600"].map(ex=>(
+            <button key={ex} onClick={()=>setNum(ex)}
+              style={{padding:"3px 10px",borderRadius:99,fontSize:11,fontWeight:700,background:num===ex?C.accent:"#fff",border:`1.5px solid ${num===ex?C.accent:C.border}`,color:num===ex?"#fff":C.textSub,cursor:"pointer"}}>
+              {ex}
+            </button>
+          ))}
+        </div>
+
+        {/* Input row */}
         <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
           <input value={num} onChange={e=>setNum(e.target.value.toUpperCase())} onKeyDown={e=>e.key==="Enter"&&go()}
-            placeholder={lang==="ko"?"항공편명 (예: EK323)":"Flight number (e.g. EK323)"} maxLength={8}
-            style={{flex:"1 1 150px",minWidth:0,background:"#fff",border:`1.5px solid ${C.borderMed}`,borderRadius:8,padding:"9px 11px",fontSize:13,color:C.text,fontFamily:"monospace",letterSpacing:"0.1em",outline:"none"}}/>
+            placeholder={lang==="ko"?"편명 직접 입력 (예: EK363)":"Enter flight number (e.g. EK363)"} maxLength={8}
+            style={{flex:"1 1 150px",minWidth:0,background:"#fff",border:`1.5px solid ${num.trim()?C.accent:C.borderMed}`,borderRadius:8,padding:"9px 11px",fontSize:14,color:C.text,fontFamily:"monospace",letterSpacing:"0.1em",outline:"none",fontWeight:700}}/>
           <input type="date" value={date} onChange={e=>setDate(e.target.value)}
             style={{flex:"0 0 auto",background:"#fff",border:`1.5px solid ${C.borderMed}`,borderRadius:8,padding:"9px 11px",fontSize:13,color:C.text,outline:"none"}}/>
           <button onClick={go} disabled={!num.trim()}
-            style={{padding:"9px 20px",borderRadius:8,fontSize:13,fontWeight:700,background:C.accent,border:"none",color:"#fff",cursor:!num.trim()?"not-allowed":"pointer",opacity:!num.trim()?0.5:1}}>
-            {lang==="ko"?"조회":"Search"} ↗
+            style={{padding:"9px 20px",borderRadius:8,fontSize:13,fontWeight:700,background:num.trim()?`linear-gradient(135deg,${C.accent},#1D4ED8)`:"#E2E7F8",border:"none",color:num.trim()?"#fff":C.textMuted,cursor:!num.trim()?"not-allowed":"pointer",transition:"all 0.15s",boxShadow:num.trim()?"0 3px 10px rgba(37,99,235,0.3)":"none"}}>
+            {lang==="ko"?"실시간 조회 ↗":"Live Track ↗"}
           </button>
         </div>
-        <p style={{fontSize:10,color:C.textMuted,margin:"8px 0 0"}}>
-          {lang==="ko"?"항공편 번호 입력 시 Flightradar24에서 실시간 현황을 확인합니다":"Redirects to Flightradar24 for live flight status"}
+
+        <p style={{fontSize:10,color:C.textMuted,margin:0}}>
+          {lang==="ko"
+            ?"🔗 Flightradar24에서 해당 편의 실시간 위치·고도·속도·지연 정보를 확인할 수 있어요"
+            :"🔗 Opens Flightradar24 showing live position, altitude, speed & delay for your flight"}
         </p>
       </div>
     </div>
