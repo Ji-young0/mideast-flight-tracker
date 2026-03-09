@@ -37,74 +37,100 @@ const ST = {
 };
 
 // ══ DATA ══════════════════════════════════════════════════════════════════════
+// ── 마지막 데이터 업데이트: 2026-03-09 ─────────────────────────────────────────
 const AIRLINES = [
-  {code:"EK",name:"Emirates",         hub:"DXB",city:{ko:"두바이",   en:"Dubai"},    status:"주의", affected:true, note:{ko:"허가 노선만 제한 운항",                   en:"Limited approved routes only"}},
-  {code:"EY",name:"Etihad Airways",   hub:"AUH",city:{ko:"아부다비", en:"Abu Dhabi"},status:"주의", affected:true, note:{ko:"런던·파리 등 소수 승인 노선만",           en:"London, Paris & few routes only"}},
-  {code:"FZ",name:"flydubai",         hub:"DXB",city:{ko:"두바이",   en:"Dubai"},    status:"주의", affected:true, note:{ko:"러시아·동유럽 일부 재개",               en:"Some Russia/E.Europe routes resumed"}},
-  {code:"QR",name:"Qatar Airways",    hub:"DOH",city:{ko:"도하",     en:"Doha"},     status:"운항중",affected:false,note:{ko:"현재 정상 운항",                       en:"Operating normally"}},
-  {code:"WY",name:"Oman Air",         hub:"MCT",city:{ko:"무스카트", en:"Muscat"},   status:"운항중",affected:false,note:{ko:"정상 운항",                             en:"Normal operations"}},
-  {code:"SV",name:"Saudia",           hub:"RUH",city:{ko:"리야드",   en:"Riyadh"},   status:"운항중",affected:false,note:{ko:"정상 운항",                             en:"Normal operations"}},
-  {code:"GF",name:"Gulf Air",         hub:"BAH",city:{ko:"바레인",   en:"Bahrain"},  status:"주의", affected:true, note:{ko:"일부 노선 우회",                        en:"Some routes diverted"}},
-  {code:"RJ",name:"Royal Jordanian",  hub:"AMM",city:{ko:"암만",     en:"Amman"},    status:"주의", affected:true, note:{ko:"일부 노선 지연",                        en:"Some routes delayed"}},
-  {code:"ME",name:"Middle East Airlines",hub:"BEY",city:{ko:"베이루트",en:"Beirut"}, status:"주의", affected:true, note:{ko:"운항 축소",                             en:"Reduced operations"}},
-  {code:"IR",name:"Iran Air",         hub:"IKA",city:{ko:"테헤란",   en:"Tehran"},   status:"중단", affected:true, note:{ko:"다수 노선 중단",                        en:"Most routes suspended"}},
-  {code:"LY",name:"El Al",            hub:"TLV",city:{ko:"텔아비브", en:"Tel Aviv"}, status:"중단", affected:true, note:{ko:"영공 제한으로 우회",                    en:"Diverted — airspace restricted"}},
+  {code:"EK",name:"Emirates",            hub:"DXB",city:{ko:"두바이",    en:"Dubai"},     status:"주의", affected:true, note:{ko:"83개 노선 60% 재개, 수일 내 100% 복구 목표. 확정 탑승객만 공항 입장",                 en:"83 routes (~60%) resumed, aiming 100% in coming days. Confirmed bookings only at airport"}},
+  {code:"EY",name:"Etihad Airways",      hub:"AUH",city:{ko:"아부다비",  en:"Abu Dhabi"}, status:"주의", affected:true, note:{ko:"3/6부터 제한 운항 재개. 3/9~12 선별 노선만 운항, 환승 승객은 양쪽 편 모두 운항 시에만 가능",en:"Limited schedule resumed Mar 6. Mar 9–12 select routes only; transit accepted if both flights operating"}},
+  {code:"FZ",name:"flydubai",            hub:"DXB",city:{ko:"두바이",    en:"Dubai"},     status:"주의", affected:true, note:{ko:"Dubai hub 제한 운항 중. Emirates와 함께 단계적 복구 진행",                          en:"Limited ops at Dubai hub. Gradual recovery with Emirates"}},
+  {code:"QR",name:"Qatar Airways",       hub:"DOH",city:{ko:"도하",      en:"Doha"},      status:"주의", affected:true, note:{ko:"3/7부터 도하발 유럽·아시아 제한 운항 재개. 영공 상황에 따라 노선 변동 가능",             en:"Limited Doha ops resumed Mar 7 to Europe & Asia. Routes subject to airspace availability"}},
+  {code:"WY",name:"Oman Air",            hub:"MCT",city:{ko:"무스카트",  en:"Muscat"},    status:"운항중",affected:false,note:{ko:"무스카트 정상 운항. 분쟁 우회 거점으로 활용 중 — 대기 항공편 다수",                      en:"Muscat operating normally — key bypass hub, high demand for seats"}},
+  {code:"SV",name:"Saudia",              hub:"RUH",city:{ko:"리야드",    en:"Riyadh"},    status:"주의", affected:true, note:{ko:"3/7부터 리야드·제다–두바이 제한 운항 재개. 리야드가 우회 환승 거점으로 부상",              en:"Riyadh–Jeddah–Dubai limited service resumed Mar 7. Riyadh emerging as key transit hub"}},
+  {code:"GF",name:"Gulf Air",            hub:"BAH",city:{ko:"바레인",    en:"Bahrain"},   status:"주의", affected:true, note:{ko:"바레인 영공 재개 후 단계적 복구 중. 최신 현황 직접 확인 필요",                           en:"Gradual recovery after Bahrain airspace reopened. Check directly for latest status"}},
+  {code:"RJ",name:"Royal Jordanian",     hub:"AMM",city:{ko:"암만",      en:"Amman"},     status:"주의", affected:true, note:{ko:"일부 노선 우회·지연. 요르단은 야간 영공 제한 일부 유지",                              en:"Some routes diverted or delayed. Jordan maintaining partial night-time airspace restrictions"}},
+  {code:"ME",name:"Middle East Airlines",hub:"BEY",city:{ko:"베이루트",  en:"Beirut"},    status:"주의", affected:true, note:{ko:"축소 운항 중. 레바논 주변 보안 상황으로 노선 불안정",                                  en:"Reduced operations. Route instability due to Lebanon security situation"}},
+  {code:"TK",name:"Turkish Airlines",    hub:"IST",city:{ko:"이스탄불",  en:"Istanbul"},  status:"운항중",affected:false,note:{ko:"정상 운항 유지. 중동 발권 승객 대상 3/31까지 무료 변경·환불 제공(2/28 이전 발권)",         en:"Normal ops. Free changes/refunds until May 10 for Middle East tickets issued by Feb 28"}},
+  {code:"IR",name:"Iran Air",            hub:"IKA",city:{ko:"테헤란",    en:"Tehran"},    status:"중단", affected:true, note:{ko:"국제선 대부분 중단. 미·이스라엘 공습 이후 이란 영공 제한 지속",                          en:"Most international routes suspended following US-Israel strikes on Iran"}},
+  {code:"LY",name:"El Al",              hub:"TLV",city:{ko:"텔아비브",  en:"Tel Aviv"},  status:"주의", affected:true, note:{ko:"이스라엘 영공 제한으로 우회 운항. 아테네 등 경유 귀환편 운항 중",                        en:"Diverting around restricted Israeli airspace. Rescue flights via Athens operating"}},
+  {code:"KE",name:"Korean Air",          hub:"ICN",city:{ko:"인천",      en:"Incheon"},   status:"주의", affected:true, note:{ko:"중동 경유 노선 운항 변경 중. 홈페이지에서 개별 편 확인 필수. 무료 변경·환불 제공",           en:"Rerouting Middle East transit flights. Free changes/refunds — check website per flight"}},
+  {code:"OZ",name:"Asiana Airlines",     hub:"ICN",city:{ko:"인천",      en:"Incheon"},   status:"주의", affected:true, note:{ko:"중동 노선 영향. 하나투어·모두투어 현지 체류객 귀환 지원 중. 환불 수수료 면제",               en:"Middle East routes affected. Full refunds offered. Korean travel agencies supporting stranded passengers"}},
 ];
 const AIRSPACE = [
-  {country:{ko:"이란",         en:"Iran"},         status:"제한",note:{ko:"민간 영공 부분 제한",        en:"Partial civil aviation restriction"}},
-  {country:{ko:"이라크",       en:"Iraq"},         status:"주의",note:{ko:"일부 공역 NOTAM 발령",       en:"NOTAM issued for some sectors"}},
-  {country:{ko:"이스라엘",     en:"Israel"},       status:"제한",note:{ko:"주요 공역 제한",            en:"Major airspace restricted"}},
-  {country:{ko:"레바논",       en:"Lebanon"},      status:"주의",note:{ko:"베이루트 공항 인근 주의",    en:"Caution near Beirut airport"}},
-  {country:{ko:"예멘",         en:"Yemen"},        status:"폐쇄",note:{ko:"영공 완전 폐쇄",           en:"Airspace fully closed"}},
-  {country:{ko:"UAE",          en:"UAE"},          status:"제한",note:{ko:"이란 드론 공격 후 부분 제한",en:"Partial restriction after Iranian strikes"}},
-  {country:{ko:"카타르",       en:"Qatar"},        status:"정상",note:{ko:"정상 운영",               en:"Normal operations"}},
-  {country:{ko:"사우디아라비아",en:"Saudi Arabia"},status:"정상",note:{ko:"정상 운영",               en:"Normal operations"}},
-  {country:{ko:"요르단",       en:"Jordan"},       status:"주의",note:{ko:"암만 공항 간헐적 지연",     en:"Intermittent delays at Amman"}},
-  {country:{ko:"쿠웨이트",     en:"Kuwait"},       status:"주의",note:{ko:"인근 분쟁 여파 주의",       en:"Advisory due to nearby conflict"}},
+  {country:{ko:"이란",          en:"Iran"},          status:"폐쇄",note:{ko:"미·이스라엘 공습 이후 민간 영공 전면 폐쇄. OIIX/Tehran FIR 진입 불가",              en:"Fully closed to civil aviation after US-Israel strikes. OIIX/Tehran FIR — no entry"}},
+  {country:{ko:"이라크",        en:"Iraq"},          status:"폐쇄",note:{ko:"ORBB/Baghdad FIR 전면 폐쇄. 프랑스 등 다수국 NOTAM 발령. 3/9 이후 상황 주시",        en:"ORBB/Baghdad FIR fully closed. Multiple country NOTAMs issued. Monitor post Mar 9"}},
+  {country:{ko:"이스라엘",      en:"Israel"},        status:"제한",note:{ko:"LLLL/Tel Aviv FIR 사전허가 필요(PPR). 일부 El Al편만 운항. EASA 회피 권고",           en:"LLLL/Tel Aviv FIR requires Prior Permission Required (PPR). EASA advises avoidance"}},
+  {country:{ko:"UAE",           en:"UAE"},           status:"제한",note:{ko:"OMAE FIR 부분 재개 — 두바이·아부다비 지정 항로(waypoint corridor)로만 운항 허용",      en:"OMAE FIR partially reopened — arrivals/departures via tightly defined waypoint corridors only"}},
+  {country:{ko:"예멘",          en:"Yemen"},         status:"폐쇄",note:{ko:"영공 완전 폐쇄 유지. 상업 항공편 없음",                                             en:"Airspace fully closed. No commercial flights"}},
+  {country:{ko:"시리아",        en:"Syria"},         status:"폐쇄",note:{ko:"OSTT/Damascus FIR 전면 폐쇄. 미·영 등 운항 금지 NOTAM 발령",                       en:"OSTT/Damascus FIR fully closed. US, UK, EU operators prohibited"}},
+  {country:{ko:"카타르",        en:"Qatar"},         status:"주의",note:{ko:"OTDF/Doha FIR 재개. 하마드 공항 운항 재개 — 영공 상황 모니터링 지속",                  en:"OTDF/Doha FIR reopened. Hamad Airport resuming ops — airspace monitoring continues"}},
+  {country:{ko:"사우디아라비아", en:"Saudi Arabia"},  status:"주의",note:{ko:"OEJD FIR 대부분 정상. 이라크 접경 북부 일부 구역 제한. 리야드 우회 환승 급증",         en:"OEJD FIR mostly normal. Partial restriction near Iraq border. Riyadh now key bypass transit"}},
+  {country:{ko:"요르단",        en:"Jordan"},        status:"주의",note:{ko:"OJAC/Amman FIR 야간 제한(15:00–06:00 UTC) 일부 지속. 암만 공항 간헐적 지연",          en:"OJAC/Amman FIR night restrictions (1500–0600 UTC) partially continuing. Intermittent delays"}},
+  {country:{ko:"레바논",        en:"Lebanon"},       status:"주의",note:{ko:"OLBB/Beirut FIR 개방 유지. 단 인근 분쟁으로 항공편 불안정. EASA 회피 권고 포함",       en:"OLBB/Beirut FIR remains open but unstable. EASA includes in advisory avoidance list"}},
 ];
 const AIRPORTS = [
-  {iata:"DXB",name:{ko:"두바이 국제공항",          en:"Dubai International"},     city:{ko:"두바이",   en:"Dubai"},    status:"제한",airline:"Emirates / flydubai",
-   detail:{ko:"이란 공격 후 일시 폐쇄, 3/2부터 제한 재개. 항공사 출발 확정 승객만 공항 입장 가능.",en:"Temporarily closed after Iranian strikes, limited ops resumed Mar 2."},
-   date:"2026-03-02",
-   warn:{ko:"항공사 확정 없이 공항 방문 금지",en:"Do NOT go to airport without airline confirmation"},site:"https://dubaiairports.ae"},
+  {iata:"DXB",name:{ko:"두바이 국제공항",          en:"Dubai International"},      city:{ko:"두바이",   en:"Dubai"},    status:"제한",airline:"Emirates / flydubai",
+   detail:{ko:"3/5부터 제한 운항 재개. Emirates 60% 네트워크 복구 중. 드론 공격으로 터미널 인근 폭발음 발생, 이후 재개. 확정 탑승권 없이 공항 방문 금지.",en:"Limited ops resumed Mar 5. Emirates restoring ~60% of network. Drone attack near terminals occurred but ops resumed. Do NOT go without confirmed booking."},
+   date:"2026-03-09",
+   warn:{ko:"항공사로부터 확정 연락 없으면 공항 방문 금지",en:"Do NOT go to airport without confirmed airline contact"},site:"https://dubaiairports.ae"},
   {iata:"AUH",name:{ko:"자이드 국제공항",          en:"Zayed International"},      city:{ko:"아부다비", en:"Abu Dhabi"},status:"제한",airline:"Etihad Airways",
-   detail:{ko:"드론 파편 낙하로 1명 사망·7명 부상. 소수 승인 노선만 재개.",en:"Drone debris: 1 killed, 7 injured. Only select routes resumed."},
-   date:"2026-03-06",
-   warn:{ko:"Etihad 앱에서 개별 운항 확인 필수",en:"Check Etihad app for flight status"},site:"https://www.abudhabi-airports.ae"},
-  {iata:"DOH",name:{ko:"하마드 국제공항",          en:"Hamad International"},      city:{ko:"도하",     en:"Doha"},     status:"운항중",airline:"Qatar Airways",
-   detail:{ko:"현재 정상 운항 중. 카타르 영공은 분쟁 직접 영향권 외부.",en:"Currently operating normally. Qatar airspace outside direct conflict zone."},
-   date:"2026-03-07",
-   warn:null,site:"https://dohahamadairport.com"},
+   detail:{ko:"드론 파편 낙하로 1명 사망·7명 부상. Etihad 3/6부터 제한 운항 재개, 3/9~12 선별 노선 운항. 환승은 양쪽 편 모두 운항 시에만 허용.",en:"Drone debris: 1 killed, 7 injured. Etihad resumed limited ops Mar 6. Mar 9–12 select routes only. Transit accepted only if both flights confirmed."},
+   date:"2026-03-09",
+   warn:{ko:"Etihad 공식 앱·웹에서 개별 편 운항 확인 필수",en:"Verify each flight on Etihad official app or website"},site:"https://www.abudhabi-airports.ae"},
+  {iata:"DOH",name:{ko:"하마드 국제공항",          en:"Hamad International"},      city:{ko:"도하",     en:"Doha"},     status:"주의",airline:"Qatar Airways",
+   detail:{ko:"카타르 영공 재개 후 운항 재개. Qatar Airways 3/7부터 유럽·아시아 제한 운항. 완전 정상화까지 시간 소요 예상.",en:"Ops resumed after Qatar airspace reopened. Qatar Airways limited Europe/Asia service from Mar 7. Full normalization will take time."},
+   date:"2026-03-09",
+   warn:{ko:"Qatar Airways 앱에서 실시간 운항 확인",en:"Check Qatar Airways app for real-time flight status"},site:"https://dohahamadairport.com"},
+  {iata:"MCT",name:{ko:"무스카트 국제공항",        en:"Muscat International"},     city:{ko:"무스카트", en:"Muscat"},   status:"운항중",airline:"Oman Air / Qatar Airways",
+   detail:{ko:"오만 영공 분쟁 외 지역 — 현재 중동 우회 항공편 핵심 거점. Qatar Airways·Virgin Atlantic 등 구조편 다수 출발. 좌석 수요 급증.",en:"Oman outside direct conflict zone — key bypass hub. Qatar Airways & Virgin Atlantic relief flights departing. Very high seat demand."},
+   date:"2026-03-09",
+   warn:null,site:"https://www.omanairports.co.om"},
   {iata:"TLV",name:{ko:"벤구리온 국제공항",        en:"Ben Gurion Airport"},       city:{ko:"텔아비브", en:"Tel Aviv"}, status:"중단",airline:"El Al",
-   detail:{ko:"영공 제한으로 다수 항공사 취소 또는 우회. El Al 우회 운항 중.",en:"Most airlines cancelled or diverting. El Al via alternative routes."},
-   date:"2026-03-01",
-   warn:{ko:"외교부 4단계 철수권고 지역",en:"Level 4 evacuation advisory by Korean MOFA"},site:null},
-  {iata:"BEY",name:{ko:"베이루트 하리리 국제공항", en:"Beirut–Rafic Hariri Intl"}, city:{ko:"베이루트", en:"Beirut"},  status:"주의",airline:"Middle East Airlines",
-   detail:{ko:"MEA 축소 운항 중. 공항 인근 보안 불안정.",en:"MEA operating reduced schedule. Security situation unstable."},
-   date:"2026-03-03",
-   warn:{ko:"외교부 4단계 철수권고 지역",en:"Level 4 evacuation advisory"},site:null},
+   detail:{ko:"이스라엘 영공 PPR 제한으로 대다수 항공사 운항 중단. El Al만 우회 운항(아테네 등 경유). 캐나다·미국 시민 이집트 육로 탈출 지원 중.",en:"Most airlines suspended due to PPR restrictions. Only El Al diverting via Athens etc. Canada/US offering land route to Egypt border."},
+   date:"2026-03-09",
+   warn:{ko:"외교부 4단계 철수권고 — 즉시 출국 권고",en:"MOFA Level 4 Evacuation — immediate departure advised"},site:null},
+  {iata:"BEY",name:{ko:"베이루트 하리리 국제공항", en:"Beirut–Rafic Hariri Intl"}, city:{ko:"베이루트", en:"Beirut"},   status:"주의",airline:"Middle East Airlines",
+   detail:{ko:"MEA 축소 운항 중. 레바논 영공 개방 유지되나 주변 불안정. EASA 레바논 영공 회피 권고 발령.",en:"MEA reduced operations. Lebanon airspace open but unstable. EASA issued advisory to avoid Lebanese FIR."},
+   date:"2026-03-08",
+   warn:{ko:"외교부 4단계 철수권고 지역",en:"MOFA Level 4 Evacuation Advisory"},site:null},
   {iata:"IKA",name:{ko:"이맘 호메이니 국제공항",   en:"Imam Khomeini Intl"},       city:{ko:"테헤란",   en:"Tehran"},   status:"중단",airline:"Iran Air",
-   detail:{ko:"이란 영공 제한으로 외국 항공사 운항 불가. 국제선 대부분 중단.",en:"Foreign airlines cannot operate due to Iranian airspace restrictions."},
-   date:"2026-02-28",
-   warn:{ko:"외교부 3단계 출국권고 지역",en:"Level 3 departure advisory"},site:null},
+   detail:{ko:"미·이스라엘 공습 이후 이란 영공 전면 폐쇄. 외국 항공사 운항 불가. 국제선 전면 중단. 이란 내 외국인 출국 매우 어려운 상황.",en:"Fully closed after US-Israel strikes. No foreign airlines. All international flights suspended. Very difficult for foreigners to depart Iran."},
+   date:"2026-03-09",
+   warn:{ko:"외교부 3단계 출국권고 — 가능한 수단으로 즉시 출국",en:"MOFA Level 3 — depart by any available means immediately"},site:null},
 ];
 const ADVISORY=[
-  {c:{ko:"이스라엘·팔레스타인",en:"Israel / Palestine"},l:{ko:"4단계 철수권고",en:"Lv4 Evacuation"},col:C.red,    warn:{ko:"즉시 철수 권고 — 항공편 운항 매우 제한",en:"Immediate evacuation — very limited flights"}},
-  {c:{ko:"레바논",en:"Lebanon"},  l:{ko:"4단계 철수권고",en:"Lv4 Evacuation"},col:C.red,    warn:{ko:"즉시 철수 권고 — 베이루트 노선 대부분 중단",en:"Immediate evacuation — Beirut routes mostly suspended"}},
-  {c:{ko:"예멘",  en:"Yemen"},    l:{ko:"4단계 철수권고",en:"Lv4 Evacuation"},col:C.red,    warn:{ko:"즉시 철수 권고 — 상업 항공편 없음",en:"Immediate evacuation — no commercial flights"}},
-  {c:{ko:"이란",  en:"Iran"},     l:{ko:"3단계 출국권고",en:"Lv3 Departure"}, col:C.orange, warn:{ko:"출국 권고 — 영공 폐쇄로 우회 운항 중",en:"Departure advised — airspace closed, diversions in effect"}},
-  {c:{ko:"이라크",en:"Iraq"},     l:{ko:"3단계 여행제한",en:"Lv3 Restricted"},col:C.orange, warn:{ko:"여행 제한 — 일부 노선 운항 불규칙",en:"Restricted — some routes operating irregularly"}},
+  {c:{ko:"이스라엘·팔레스타인",en:"Israel / Palestine"},l:{ko:"4단계 철수권고",en:"Lv4 Evacuation"},col:C.red,    warn:{ko:"즉시 철수 — 항공편 대부분 취소, El Al 우회 운항만 가능",en:"Evacuate immediately — most flights cancelled, only El Al diverted routes"}},
+  {c:{ko:"레바논",            en:"Lebanon"},           l:{ko:"4단계 철수권고",en:"Lv4 Evacuation"},col:C.red,    warn:{ko:"즉시 철수 — MEA 축소 운항, 이른 시일 내 탈출 권고",en:"Evacuate immediately — MEA reduced ops, depart as soon as possible"}},
+  {c:{ko:"예멘",              en:"Yemen"},             l:{ko:"4단계 철수권고",en:"Lv4 Evacuation"},col:C.red,    warn:{ko:"즉시 철수 — 상업 항공편 없음, 특별기 이용",en:"Evacuate immediately — no commercial flights, charter/special flights only"}},
+  {c:{ko:"이란",              en:"Iran"},              l:{ko:"3단계 출국권고",en:"Lv3 Departure"}, col:C.orange, warn:{ko:"즉시 출국 — 영공 폐쇄, 육로 포함 가능한 수단 모두 이용",en:"Depart immediately — airspace closed, use any available means including overland"}},
+  {c:{ko:"이라크",            en:"Iraq"},              l:{ko:"3단계 여행제한",en:"Lv3 Restricted"},col:C.orange, warn:{ko:"여행 제한 — 영공 폐쇄로 항공편 없음",en:"Restricted — no flights due to airspace closure"}},
+  {c:{ko:"UAE",               en:"UAE"},               l:{ko:"2단계 여행자제",en:"Lv2 Caution"},   col:C.yellow, warn:{ko:"두바이·아부다비 제한 운항 중 — 여행 자제 및 항공사 확인 필수",en:"Dubai & Abu Dhabi limited ops — avoid non-essential travel, confirm with airline"}},
 ];
 const US_ADVISORY=[
-  {c:{ko:"이스라엘·서안지구",en:"Israel / West Bank"},l:{ko:"Level 2 — 주의",en:"Level 2 — Exercise Caution"},col:C.yellow, warn:{ko:"일부 노선 운항 중 — 상황 주시",en:"Some routes operating — monitor situation"}},
-  {c:{ko:"가자지구",en:"Gaza"},             l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 항공편 없음",en:"Do not travel — no flights available"}},
-  {c:{ko:"레바논",  en:"Lebanon"},          l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 베이루트 노선 중단",en:"Do not travel — Beirut routes suspended"}},
-  {c:{ko:"예멘",   en:"Yemen"},             l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 상업 항공편 없음",en:"Do not travel — no commercial flights"}},
-  {c:{ko:"이란",   en:"Iran"},              l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 영공 폐쇄",en:"Do not travel — airspace closed"}},
-  {c:{ko:"이라크", en:"Iraq"},              l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 운항 불규칙",en:"Do not travel — irregular operations"}},
-  {c:{ko:"UAE",    en:"UAE"},               l:{ko:"Level 2 — 주의",en:"Level 2 — Exercise Caution"},    col:C.yellow, warn:{ko:"두바이·아부다비 운항 중 — 주의 권고",en:"Dubai & Abu Dhabi operating — exercise caution"}},
+  {c:{ko:"이란",              en:"Iran"},              l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 영공 폐쇄, 미국인 즉시 출국 요청",en:"Do not travel — airspace closed, State Dept urging US citizens to depart"}},
+  {c:{ko:"이라크",            en:"Iraq"},              l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 영공 폐쇄, 드론·미사일 공격 위험",en:"Do not travel — airspace closed, drone/missile attack risk"}},
+  {c:{ko:"가자지구",          en:"Gaza"},              l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 항공편 없음",en:"Do not travel — no flights"}},
+  {c:{ko:"레바논",            en:"Lebanon"},           l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 베이루트 노선 불안정",en:"Do not travel — Beirut routes unstable"}},
+  {c:{ko:"예멘",              en:"Yemen"},             l:{ko:"Level 4 — 여행금지",en:"Level 4 — Do Not Travel"},    col:C.red,    warn:{ko:"여행 금지 — 상업 항공편 없음",en:"Do not travel — no commercial flights"}},
+  {c:{ko:"이스라엘·서안지구", en:"Israel / West Bank"},l:{ko:"Level 3 — 여행재고",en:"Level 3 — Reconsider Travel"},col:C.orange, warn:{ko:"여행 재고 — 영공 PPR 제한, El Al 우회 운항만",en:"Reconsider travel — airspace PPR restriction, El Al diverted routes only"}},
+  {c:{ko:"바레인·쿠웨이트",   en:"Bahrain / Kuwait"},  l:{ko:"Level 3 — 여행재고",en:"Level 3 — Reconsider Travel"},col:C.orange, warn:{ko:"여행 재고 — 공항 복구 중, 상황 유동적",en:"Reconsider travel — airports recovering, situation fluid"}},
+  {c:{ko:"UAE",               en:"UAE"},               l:{ko:"Level 2 — 주의",   en:"Level 2 — Exercise Caution"}, col:C.yellow, warn:{ko:"두바이·아부다비 제한 운항 — 주의 및 항공사 확인",en:"Dubai & Abu Dhabi limited ops — exercise caution, confirm with airline"}},
+  {c:{ko:"사우디아라비아",     en:"Saudi Arabia"},      l:{ko:"Level 2 — 주의",   en:"Level 2 — Exercise Caution"}, col:C.yellow, warn:{ko:"리야드 우회 환승 증가 — 북부 국경지대 주의",en:"Riyadh transit increasing — caution near northern border areas"}},
 ];
-// Ticker uses AI-fetched items when available, falls back to static data
+// ── 최신 뉴스 데이터 (수동 업데이트) ─────────────────────────────────────────
+const STATIC_NEWS = [
+  {icon:"📢",tag:"Emirates",  severity:"high",  time:"3/9", content:"Emirates, 수일 내 100% 네트워크 복구 목표. 현재 83개 노선 106편 왕복 운항 중(약 60%). 확정 탑승객만 공항 입장 가능.",                               source:"emirates.com",  fresh:true},
+  {icon:"📢",tag:"Etihad",    severity:"high",  time:"3/8", content:"Etihad, 3/9~12 제한 노선 일정 확정. 환승 승객은 연결 편 양쪽 모두 운항 확정된 경우에만 탑승 가능. etihad.com 또는 앱에서 확인.",                        source:"etihad.com",    fresh:true},
+  {icon:"📢",tag:"Qatar",     severity:"high",  time:"3/8", content:"Qatar Airways, 3/7부터 런던·파리·마드리드·로마·암스테르담·코펜하겐발 제한 운항 재개. Oman Air·IndiGo 등도 제한 운항 합류.",                             source:"qatarairways.com",fresh:true},
+  {icon:"📢",tag:"Saudia",    severity:"medium",time:"3/7", content:"Saudia, 리야드·제다–두바이 제한 운항 3/7 재개. 리야드(RUH)가 우회 환승 거점으로 부상, 좌석 수요 급증.",                                                source:"saudia.com",    fresh:false},
+  {icon:"📢",tag:"Turkish",   severity:"low",   time:"3/4", content:"Turkish Airlines, 2/28 이전 발권된 중동 노선 탑승객에게 3/31까지 무료 변경·환불 제공(5/10까지 유효).",                                                 source:"turkishairlines.com",fresh:false},
+  {icon:"⛔",tag:"이란영공",  severity:"high",  time:"3/9", content:"이란 영공(OIIX/Tehran FIR) 전면 폐쇄 지속. 미·이스라엘 공습 이후 민간 항공기 진입 불가.",                                                               source:"NOTAM/FR24",   fresh:true},
+  {icon:"⛔",tag:"이라크영공", severity:"high",  time:"3/9", content:"이라크 영공(ORBB/Baghdad FIR) 전면 폐쇄. 프랑스·독일 등 다수국 운항 금지 NOTAM 발령.",                                                                  source:"NOTAM/EASA",   fresh:true},
+  {icon:"🚨",tag:"EASA경보",  severity:"high",  time:"3/8", content:"EASA, 이란·이라크·이스라엘·UAE·요르단·레바논·쿠웨이트·카타르·바레인·오만·사우디 영공 회피 권고 발령.",                                                   source:"easa.europa.eu",fresh:false},
+  {icon:"🚨",tag:"UAE영공",   severity:"medium",time:"3/8", content:"UAE 영공(OMAE FIR), 두바이·아부다비 지정 항로(waypoint corridor)로만 운항 허용. 프랑스 운항 금지 NOTAM 발령.",                                           source:"GCAA/NOTAM",   fresh:false},
+  {icon:"✅",tag:"무스카트",  severity:"low",   time:"3/9", content:"무스카트(MCT) 오만 영공 분쟁 외 지역 — 중동 우회 핵심 거점. Virgin Atlantic·Qatar 구조편 다수 출발. 좌석 수요 매우 높음.",                               source:"FR24/CNN",      fresh:true},
+  {icon:"✅",tag:"KE·OZ환불",severity:"low",   time:"3/3", content:"대한항공·아시아나 중동 경유 노선 무료 변경·환불 제공. 하나투어·모두투어, 두바이·카이로 체류객 약 540명 귀환 지원 중.",                                      source:"Seoul Econ Daily",fresh:false},
+  {icon:"⚠️",tag:"항공료급등",severity:"medium",time:"3/7", content:"런던–방콕 편도 이코노미 최대 71,000 THB(약 £1,500)으로 급등. 중동 영공 폐쇄로 대체 항공편 좌석 부족 심각.",                                              source:"Pattaya Mail",  fresh:false},
+];
+// Ticker static data builder
 function buildStaticTicker(lang) {
   const items = [];
   AIRSPACE.filter(a=>a.status==="폐쇄").forEach(a=>{
@@ -125,12 +151,10 @@ function buildStaticTicker(lang) {
   return items;
 }
 
-function Ticker({lang, items, loading, lastRefresh}){
+function Ticker({lang, items, loading}){
   const base = items && items.length > 0 ? items : buildStaticTicker(lang);
   const looped = [...base, ...base];
-  const timeLabel = lastRefresh
-    ? lastRefresh.toLocaleTimeString(lang==="ko"?"ko-KR":"en-US",{hour:"2-digit",minute:"2-digit"})
-    : (lang==="ko"?"현재":"now");
+  const timeLabel = lang==="ko"?"매일 CET 업데이트":"Updated daily CET";
   return(
     <div style={{overflow:"hidden",background:C.ticker,padding:"7px 0",borderBottom:`1px solid ${C.accentLight}`,position:"relative"}}>
       <div style={{position:"absolute",left:0,top:0,bottom:0,width:80,background:`linear-gradient(to right,${C.ticker},transparent)`,zIndex:2,pointerEvents:"none"}}/>
@@ -171,16 +195,6 @@ const LABEL={
   en:{airline:{"운항중":"Normal","주의":"Caution","중단":"Suspended"},airspace:{"정상":"Normal","주의":"Caution","제한":"Restricted","폐쇄":"Closed"},airport:{"운항중":"Operating","제한":"Restricted","주의":"Caution","중단":"Suspended"},flight:{"정상운항":"On Time","지연":"Delayed","취소":"Cancelled","우회":"Diverted","정보없음":"Unknown"}},
 };
 const TABS=[{id:"airlines",ko:"✈ 항공사",en:"✈ Airlines"},{id:"airports",ko:"🛬 공항",en:"🛬 Airports"},{id:"airspace",ko:"🗺 영공",en:"🗺 Airspace"},{id:"refund",ko:"💳 환불",en:"💳 Refund"},{id:"altflights",ko:"🔄 대체항공편",en:"🔄 Alt Flights"}];
-
-// ══ STATIC NEWS DATA (수동 업데이트) ══════════════════════════════════════════
-const STATIC_NEWS = [
-  {icon:"📢",tag:"Etihad",severity:"high",time:"3/6",content:"Etihad Airways가 3월 6일부터 인천 포함 25개 노선 제한 운항 재개. 3월 19일까지 운항 예정.",source:"etihad.com",fresh:false},
-  {icon:"📢",tag:"Emirates",severity:"high",time:"3/7",content:"Emirates가 83개 노선 106편 왕복 운항 재개, 네트워크의 약 60% 회복. 수일 내 100% 복구 목표.",source:"emirates.com",fresh:false},
-  {icon:"📢",tag:"Qatar",severity:"medium",time:"3/7",content:"Qatar Airways가 런던·파리·마드리드·로마·프랑크푸르트 행 운항 재개. 도하 공항 정상 운영 중.",source:"qatarairways.com",fresh:false},
-  {icon:"⛔",tag:"이란영공",severity:"high",time:"3/7",content:"이란 영공 부분 제한 지속. 다수 항공사 이란 영공 우회 운항 중.",source:"NOTAM",fresh:false},
-  {icon:"⚠️",tag:"UAE",severity:"medium",time:"3/6",content:"UAE 영공 부분 재개. 아부다비·두바이 공항 제한적 운항 중. 공항 방문 전 항공사 확인 필수.",source:"GCAA",fresh:false},
-  {icon:"✅",tag:"TK정상",severity:"low",time:"3/2",content:"Turkish Airlines 정상 운항 유지. 이스탄불 경유 우회 항공편 수요 급증.",source:"turkishairlines.com",fresh:false},
-];
 
 // ══ SHARED COMPONENTS ═════════════════════════════════════════════════════════
 function Badge({status,label}){
@@ -295,72 +309,139 @@ function Search({lang}){
 }
 
 function Refund({lang}){
+  // ── 환불 데이터 (3/9 기준) ────────────────────────────────────────────────
   const REFUND_DATA=[
-    {code:"EK",name:"Emirates",         flag:"🇦🇪",
-     policy:{ko:"2026년 3월 10일 이전 출발편 무료 환불 또는 3월 20일 이전 무료 재예약 가능.",en:"Free refund for flights before Mar 10, or free rebooking before Mar 20, 2026."},
+    {code:"EK",name:"Emirates",            flag:"🇦🇪",
+     waiver:{ko:"Waiver CW-2026-ME 확정",en:"Waiver CW-2026-ME confirmed"},
+     policy:{
+       ko:"2/28~3/20 출발 예약편: ① 무료 날짜 변경(3/31까지 새 출발일 지정) ② 전액 환불(미사용 구간) ③ 여행 크레딧 옵션. 항공사 취소편은 패널티 없이 전액 환불.",
+       en:"Bookings for travel Feb 28–Mar 20: ① Free date change (new travel by Mar 31) ② Full refund (unused portion) ③ Travel credit option. Airline-cancelled flights: full refund, no penalty."
+     },
+     howTo:{ko:"emirates.com → Manage Booking → 'Waiver' 선택 / 고객센터",en:"emirates.com → Manage Booking → select 'Waiver' / call center"},
      url:"https://www.emirates.com/english/help/travel-updates/",
      refundUrl:"https://www.emirates.com/english/manage-booking/",
-     phone:"+971 600 555 555"},
-    {code:"EY",name:"Etihad Airways",   flag:"🇦🇪",
-     policy:{ko:"2월 28일 이전 발권, 3월 21일 이전 출발편: 5월 15일까지 무료 재예약. 3월 21일까지 환불 신청 가능.",en:"Tickets issued before Feb 28, travel before Mar 21: free rebooking until May 15. Refunds available until Mar 21."},
+     phone:"+971 600 555 555",
+     deadline:{ko:"3/31까지 새 여정 완료",en:"New travel must be completed by Mar 31"}},
+
+    {code:"EY",name:"Etihad Airways",      flag:"🇦🇪",
+     waiver:{ko:"Waiver CW005-2026 확정",en:"Waiver CW005-2026 confirmed"},
+     policy:{
+       ko:"2/28 이전 발권, 3/21 이전 출발편: 5/15까지 무료 재예약. 미사용 전체 티켓은 전액 환불. 3/9~12 운항 확인 후 환승 불가 시 자동 리스케줄. ※ Avios 등 제휴 포인트 발권은 발권 항공사에 문의.",
+       en:"Tickets issued before Feb 28, depart before Mar 21: free rebooking until May 15. Fully unused ticket: full refund. Mar 9–12 transit refused if connecting flight not confirmed. ※ Avios/partner miles tickets: contact issuing programme."
+     },
+     howTo:{ko:"etihad.com → Manage → Change Flight → 'Waiver' 선택",en:"etihad.com → Manage → Change Flight → select 'Waiver'"},
      url:"https://www.etihad.com/en/manage/regional-flight-disruption-update",
      refundUrl:"https://www.etihad.com/en/help/refund-form",
-     phone:"+971 2 599 0000"},
-    {code:"QR",name:"Qatar Airways",    flag:"🇶🇦",
-     policy:{ko:"2월 28일~3월 10일 출발편: 14일 이내 무료 날짜 변경 또는 미사용 구간 환불 가능.",en:"Flights Feb 28–Mar 10: free date change within 14 days, or refund for unused portion."},
+     phone:"+971 2 599 0000 (UAE) / 1-877-690-0767 (US) / 0345-608-1225 (UK)",
+     deadline:{ko:"5/15까지 재예약 가능",en:"Rebooking valid until May 15"}},
+
+    {code:"QR",name:"Qatar Airways",       flag:"🇶🇦",
+     waiver:{ko:"웨이버 발령 완료",en:"Waiver issued"},
+     policy:{
+       ko:"2/28~3/10 출발편: 14일 이내 무료 날짜 변경 또는 미사용 구간 환불. 도하 공항 영공 폐쇄 기간 항공사 취소분은 수수료 없이 전액 환불. ※ 파트너 포인트 발권은 발권 항공사에 문의.",
+       en:"Flights Feb 28–Mar 10: free date change within 14 days, or refund for unused portion. Airline-cancelled (DOH closure): full refund, no fee. ※ Partner-miles tickets: contact issuing programme."
+     },
+     howTo:{ko:"qatarairways.com → Manage Booking / 고객센터",en:"qatarairways.com → Manage Booking / call center"},
      url:"https://www.qatarairways.com/en/travel-alerts.html",
      refundUrl:"https://www.qatarairways.com/en/refund.html",
-     phone:"+974 4023 0000"},
-    {code:"FZ",name:"flydubai",         flag:"🇦🇪",
-     policy:{ko:"운항 취소된 항공편에 대해 전액 환불 또는 무료 재예약 제공.",en:"Full refund or free rebooking for cancelled flights."},
-     url:"https://www.flydubai.com/en/travel-info/travel-updates",
-     refundUrl:"https://www.flydubai.com/en/manage/refunds",
-     phone:"+971 600 544 445"},
-    {code:"TK",name:"Turkish Airlines", flag:"🇹🇷",
-     policy:{ko:"중동 분쟁 영향 노선: 무료 날짜 변경 또는 환불 가능. 터키항공 웹사이트에서 신청.",en:"Middle East affected routes: free date change or refund available via website."},
+     phone:"+974 4023 0000",
+     deadline:{ko:"취소 후 14일 이내 신청",en:"Apply within 14 days of cancellation"}},
+
+    {code:"TK",name:"Turkish Airlines",    flag:"🇹🇷",
+     waiver:{ko:"웨이버 발령 — 중동 전 노선",en:"Waiver — all Middle East routes"},
+     policy:{
+       ko:"2/28 이전 발권된 중동 노선(바레인·이란·이라크·이스라엘·요르단·쿠웨이트·레바논·오만·카타르·사우디·시리아·UAE) 탑승객: 5/10까지 무료 날짜 변경·무료 환불·유효기간 연장(5/10까지) 중 선택 가능.",
+       en:"Tickets issued by Feb 28 to/from Bahrain, Iran, Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, Syria, UAE: free change, free refund, or validity extension to May 10."
+     },
+     howTo:{ko:"turkishairlines.com → My Bookings / 전화 신청",en:"turkishairlines.com → My Bookings / call center"},
      url:"https://www.turkishairlines.com/en-int/announcements/",
      refundUrl:"https://www.turkishairlines.com/en-int/flights/refund-ticket/",
-     phone:"+90 212 444 0 849"},
-    {code:"KE",name:"Korean Air",       flag:"🇰🇷",
-     policy:{ko:"중동 경유 노선 운항 변경 시 무료 일정 변경 또는 환불 가능. 고객센터 또는 홈페이지 신청.",en:"Free schedule change or refund for affected Middle East routing. Apply via website or call center."},
+     phone:"+90 212 444 0 849",
+     deadline:{ko:"5/10까지 변경·환불 신청 가능",en:"Changes/refunds must be requested by May 10"}},
+
+    {code:"KE",name:"Korean Air",          flag:"🇰🇷",
+     waiver:{ko:"중동 노선 긴급 공지 발령",en:"Emergency notice for Middle East routes"},
+     policy:{
+       ko:"중동 경유 노선(두바이·아부다비·도하·암만·베이루트 등) 운항 변경·취소 시: 수수료 없이 일정 변경 또는 전액 환불. 홈페이지 또는 고객센터(1588-2001) 통해 신청. 여행사 구매 티켓은 해당 여행사에 문의.",
+       en:"Middle East routing (Dubai, Abu Dhabi, Doha, Amman, Beirut etc.) changed/cancelled: free schedule change or full refund. Apply online or call 1588-2001. Travel agency tickets: contact agency."
+     },
+     howTo:{ko:"koreanair.com → 예약관리 → 환불/변경 / 고객센터 1588-2001",en:"koreanair.com → Manage Booking → Refund/Change / Call 1588-2001"},
      url:"https://www.koreanair.com/us/en/travel-info/travel-notice",
      refundUrl:"https://www.koreanair.com/us/en/manage/refund",
-     phone:"1588-2001"},
-    {code:"OZ",name:"Asiana Airlines",  flag:"🇰🇷",
-     policy:{ko:"중동 노선 운항 중단 시 환불 수수료 면제. 아시아나 홈페이지 또는 고객센터 신청.",en:"Refund fee waived for suspended Middle East routes. Apply via website or call center."},
+     phone:"1588-2001 (국내) / +82-2-2656-2001 (해외)",
+     deadline:{ko:"운항 재개 후 일정 기간 내 신청",en:"Apply within a set period after service resumes"}},
+
+    {code:"OZ",name:"Asiana Airlines",     flag:"🇰🇷",
+     waiver:{ko:"중동 노선 환불 수수료 면제",en:"Refund fee waiver for Middle East routes"},
+     policy:{
+       ko:"중동 노선 운항 취소·중단 시 환불 수수료 전액 면제. 하나투어·모두투어 등 패키지 고객은 여행사 통해 귀환편 지원 중(체류객 약 540명 지원). 아시아나 홈페이지 또는 1588-8000으로 신청.",
+       en:"Full waiver of refund penalties for cancelled/suspended Middle East routes. Package customers (Hanatour/Modetour): ~540 stranded passengers being assisted by travel agencies. Apply online or call 1588-8000."
+     },
+     howTo:{ko:"flyasiana.com → 예약관리 → 환불 / 고객센터 1588-8000",en:"flyasiana.com → Manage Booking → Refund / Call 1588-8000"},
      url:"https://flyasiana.com/C/KR/KO/info/notice-list",
      refundUrl:"https://flyasiana.com/C/KR/KO/manage/refund",
-     phone:"1588-8000"},
-    {code:"LH",name:"Lufthansa",        flag:"🇩🇪",
-     policy:{ko:"두바이·아부다비 3월 10일까지, 텔아비브 3월 22일까지 운항 중단. 무료 환불 또는 재예약 가능.",en:"Dubai/AbuDhabi suspended until Mar 10, Tel Aviv until Mar 22. Free refund or rebooking."},
+     phone:"1588-8000 (국내) / +82-2-2669-8000 (해외)",
+     deadline:{ko:"운항 재개 후 일정 기간 내 신청",en:"Apply within a set period after service resumes"}},
+
+    {code:"LH",name:"Lufthansa Group",     flag:"🇩🇪",
+     waiver:{ko:"LH·LX·OS·SN·EN 전체 웨이버",en:"Waiver covers LH, LX, OS, SN, EN"},
+     policy:{
+       ko:"두바이·아부다비·도하·텔아비브·암만·베이루트 운항 중단분: 무료 환불 또는 3/31까지 무료 재예약. 이란 테헤란(IKA) 노선: 3/28까지 운항 취소, 전액 환불 가능.",
+       en:"Cancelled flights to Dubai, Abu Dhabi, Doha, Tel Aviv, Amman, Beirut: free refund or rebooking by Mar 31. Tehran (IKA): suspended until Mar 28, full refund available."
+     },
+     howTo:{ko:"lufthansa.com → My Bookings / 고객센터",en:"lufthansa.com → My Bookings / call center"},
      url:"https://www.lufthansa.com/us/en/travel-requirements-entry-regulations",
      refundUrl:"https://www.lufthansa.com/us/en/refund",
-     phone:"+1 800 645 3880"},
-    {code:"ME",name:"Middle East Airlines",flag:"🇱🇧",
-     policy:{ko:"베이루트 노선 축소 운항 중. 변경 또는 환불은 MEA 공식 홈페이지에서 신청.",en:"Reduced Beirut operations. Changes/refunds via MEA official website."},
-     url:"https://www.mea.com.lb/english/pages/travel-updates",
-     refundUrl:"https://www.mea.com.lb/english/pages/refund",
-     phone:"+961 1 629 999"},
-    {code:"RJ",name:"Royal Jordanian",  flag:"🇯🇴",
-     policy:{ko:"일부 노선 지연 및 우회 운항. 환불 정책은 RJ 공식 홈페이지에서 확인.",en:"Some routes delayed/diverted. Check RJ official site for refund policy."},
-     url:"https://www.rj.com/en/travel-info/travel-updates",
-     refundUrl:"https://www.rj.com/en/plan-and-book/refund-request",
-     phone:"+962 6 510 0000"},
-    {code:"LY",name:"El Al",            flag:"🇮🇱",
-     policy:{ko:"이스라엘 영공 제한으로 우회 운항 중. 환불 및 재예약은 El Al 홈페이지에서 신청.",en:"Diverted due to Israeli airspace restrictions. Refunds/rebooking via El Al website."},
-     url:"https://www.elal.com/en/Pages/Travel-updates.aspx",
-     refundUrl:"https://www.elal.com/en/Pages/Refund.aspx",
-     phone:"+972 3 977 1111"},
-    {code:"IR",name:"Iran Air",         flag:"🇮🇷",
-     policy:{ko:"국제선 대부분 중단. 환불은 이란에어 고객센터 또는 예약 대리점을 통해 신청.",en:"Most international routes suspended. Contact Iran Air or your travel agent for refund."},
-     url:"https://www.iranair.com/en/",
-     refundUrl:null,
-     phone:"+98 21 4600"},
-    {code:"GF",name:"Gulf Air",         flag:"🇧🇭",
-     policy:{ko:"일부 노선 우회 운항 중. 환불 및 재예약은 Gulf Air 홈페이지에서 신청.",en:"Some routes diverted. Refunds and rebooking via Gulf Air website."},
+     phone:"+1 800 645 3880 (US) / +49 69 86 799 799 (DE)",
+     deadline:{ko:"3/31까지 재예약 완료",en:"Rebooking must be completed by Mar 31"}},
+
+    {code:"BA",name:"British Airways",     flag:"🇬🇧",
+     waiver:{ko:"중동 웨이버 + 귀국편 운항",en:"Middle East waiver + repatriation flights"},
+     policy:{
+       ko:"중동 영향 노선 취소분: 무료 환불 또는 날짜 변경. UK261 적용 탑승객: 영공 폐쇄는 '특별한 상황(extraordinary circumstances)'으로 고정 보상 미적용 — 리부킹 또는 환불만 가능. 오만·리야드 경유 귀국편 일부 운항 중.",
+       en:"Cancelled Middle East flights: free refund or rebooking. UK261 passengers: airspace closure = extraordinary circumstances — fixed compensation not applicable; rebooking or refund only. Some repatriation flights via Muscat/Riyadh."
+     },
+     howTo:{ko:"ba.com → Manage My Booking / 고객센터",en:"ba.com → Manage My Booking / call center"},
+     url:"https://www.britishairways.com/en-gb/information/incident/airspace-closures",
+     refundUrl:"https://www.britishairways.com/en-gb/information/incident/manage-booking",
+     phone:"+44 344 493 0787 (UK)",
+     deadline:{ko:"취소 후 최대 7일 이내 환불 신청 권장",en:"Refund recommended within 7 days of cancellation"}},
+
+    {code:"SQ",name:"Singapore Airlines",  flag:"🇸🇬",
+     waiver:{ko:"웨이버 확정",en:"Waiver confirmed"},
+     policy:{
+       ko:"중동 경유 항로 변경 및 운항 취소 발생분: 무료 날짜 변경 또는 전액 환불. 장거리 노선(런던·암스테르담·바르셀로나 등) 우회 운항으로 비행시간 증가.",
+       en:"Affected by rerouting/cancellation: free date change or full refund. Long-haul routes (London, Amsterdam, Barcelona etc.) being rerouted, adding significant flight time."
+     },
+     howTo:{ko:"singaporeair.com → Manage Booking / 고객센터",en:"singaporeair.com → Manage Booking / call center"},
+     url:"https://www.singaporeair.com/en_UK/us/travel-info/travel-advisory/",
+     refundUrl:"https://www.singaporeair.com/en_UK/us/manage-booking/",
+     phone:"+65 6223 8888",
+     deadline:{ko:"취소 후 일정 기간 내 신청",en:"Apply within a set period after cancellation"}},
+
+    {code:"GF",name:"Gulf Air",            flag:"🇧🇭",
+     waiver:{ko:"바레인 영공 재개 후 단계적 복구",en:"Gradual recovery after Bahrain airspace reopened"},
+     policy:{
+       ko:"바레인 영공 폐쇄로 운항 중단된 항공편: 무료 환불 또는 재예약. 현재 단계적 복구 진행 중. 최신 운항 현황은 Gulf Air 공식 홈페이지 확인.",
+       en:"Flights cancelled due to Bahrain airspace closure: free refund or rebooking. Gradual recovery ongoing. Check Gulf Air official website for latest flight status."
+     },
+     howTo:{ko:"gulfair.com → Help Center → Refunds",en:"gulfair.com → Help Center → Refunds"},
      url:"https://www.gulfair.com/help-center/travel-updates",
      refundUrl:"https://www.gulfair.com/help-center/refunds",
-     phone:"+973 17 373 737"},
+     phone:"+973 17 373 737",
+     deadline:{ko:"공식 홈페이지에서 기한 확인",en:"Check official website for deadline"}},
+
+    {code:"LY",name:"El Al",              flag:"🇮🇱",
+     waiver:{ko:"이스라엘 영공 제한 대응 웨이버",en:"Waiver due to Israeli airspace restrictions"},
+     policy:{
+       ko:"이스라엘 영공 PPR 제한으로 우회 운항 중. 취소된 항공편 전액 환불 또는 재예약. 아테네 경유 귀국편 운항 중. 이스라엘 내 고객: El Al 공식 채널 통해 출국 지원 신청.",
+       en:"Diverted due to Israeli airspace PPR restrictions. Cancelled flights: full refund or rebooking. Rescue flights operating via Athens. Customers in Israel: apply via El Al official channels."
+     },
+     howTo:{ko:"elal.com → Manage Booking / 고객센터",en:"elal.com → Manage Booking / call center"},
+     url:"https://www.elal.com/en/Pages/Travel-updates.aspx",
+     refundUrl:"https://www.elal.com/en/Pages/Refund.aspx",
+     phone:"+972 3 977 1111",
+     deadline:{ko:"공식 홈페이지에서 기한 확인",en:"Check official website for deadline"}},
   ];
 
   const [selected,setSelected]=useState(null);
@@ -412,7 +493,14 @@ function Refund({lang}){
             </div>
           </div>
           <div style={{padding:16,display:"flex",flexDirection:"column",gap:12}}>
-            {/* Policy */}
+            {/* Waiver confirmed badge */}
+            {sel.waiver&&(
+              <div style={{display:"inline-flex",alignItems:"center",gap:6,padding:"5px 12px",borderRadius:8,background:C.grnBg,border:`1px solid ${C.grnBd}`,alignSelf:"flex-start"}}>
+                <span style={{fontSize:12}}>✅</span>
+                <span style={{fontSize:11,fontWeight:800,color:C.green}}>{sel.waiver[lang]||sel.waiver.ko}</span>
+              </div>
+            )}
+            {/* Policy box */}
             <div style={{display:"flex",gap:10,padding:"11px 14px",borderRadius:10,background:"#FFF7ED",border:`1.5px solid ${C.orgBd}`}}>
               <span style={{fontSize:18,flexShrink:0}}>🚨</span>
               <div>
@@ -422,7 +510,21 @@ function Refund({lang}){
                 <p style={{fontSize:13,color:C.textSub,margin:0,lineHeight:1.65}}>{sel.policy[lang]}</p>
               </div>
             </div>
-
+            {/* Deadline + HowTo 2-col */}
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+              {sel.deadline&&(
+                <div style={{background:C.yelBg,border:`1px solid ${C.yelBd}`,borderRadius:10,padding:11}}>
+                  <p style={{fontSize:10,fontWeight:800,color:C.yellow,margin:"0 0 4px",textTransform:"uppercase"}}>⏰ {lang==="ko"?"신청 기한":"Deadline"}</p>
+                  <p style={{fontSize:12,color:C.textSub,margin:0,lineHeight:1.5}}>{sel.deadline[lang]}</p>
+                </div>
+              )}
+              {sel.howTo&&(
+                <div style={{background:C.accentLight,border:`1px solid ${C.borderMed}`,borderRadius:10,padding:11}}>
+                  <p style={{fontSize:10,fontWeight:800,color:C.accent,margin:"0 0 4px",textTransform:"uppercase"}}>📋 {lang==="ko"?"신청 방법":"How to Apply"}</p>
+                  <p style={{fontSize:12,color:C.textSub,margin:0,lineHeight:1.5}}>{sel.howTo[lang]}</p>
+                </div>
+              )}
+            </div>
             {/* Links */}
             <div style={{display:"flex",flexDirection:"column",gap:8}}>
               <a href={sel.url} target="_blank" rel="noreferrer"
@@ -436,17 +538,19 @@ function Refund({lang}){
                 </a>
               )}
             </div>
-
             {/* Phone */}
             {sel.phone&&(
               <div style={{display:"flex",alignItems:"center",gap:8,padding:"9px 12px",borderRadius:10,background:C.cardSub,border:`1px solid ${C.border}`}}>
                 <span style={{fontSize:14}}>📞</span>
                 <div>
                   <p style={{fontSize:10,fontWeight:700,color:C.textMuted,margin:"0 0 2px",textTransform:"uppercase"}}>{lang==="ko"?"고객센터":"Customer Service"}</p>
-                  <p style={{fontSize:13,fontWeight:700,color:C.text,margin:0,fontFamily:"monospace"}}>{sel.phone}</p>
+                  <p style={{fontSize:12,fontWeight:700,color:C.text,margin:0,fontFamily:"monospace"}}>{sel.phone}</p>
                 </div>
               </div>
             )}
+            <p style={{fontSize:10,color:C.textMuted,margin:0}}>
+              {lang==="ko"?"※ 여행사 구매 티켓은 해당 여행사에 별도 문의하세요":"※ Tickets from travel agencies: contact the agency directly"}
+            </p>
           </div>
         </div>
       )}
@@ -457,165 +561,8 @@ function Refund({lang}){
           <p style={{color:C.textSub,fontSize:13,margin:"0 0 6px",fontWeight:600}}>
             {lang==="ko"?"위에서 항공사를 선택하세요":"Select an airline above"}
           </p>
-        </div>
-      )}
-    </div>
-  );
-}
-                style={{display:"flex",alignItems:"center",gap:5,padding:"5px 11px",borderRadius:8,fontSize:11,fontWeight:700,background:C.accent,border:"none",color:"#fff",cursor:sel?.loading?"not-allowed":"pointer",opacity:sel?.loading?0.6:1}}>
-                <span style={sel?.loading?{display:"inline-block",animation:"spin 1s linear infinite"}:{}}>{sel?.loading?"⟳":"⟳"}</span>
-                {lang==="ko"?"새로고침":"Refresh"}
-              </button>
-            </div>
-          </div>
-
-          {/* Loading */}
-          {sel?.loading&&(
-            <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"48px 20px",gap:12}}>
-              <div style={{fontSize:30,animation:"spin 2s linear infinite",display:"inline-block"}}>🔍</div>
-              <p style={{color:C.textMuted,fontSize:13,margin:0,textAlign:"center"}}>
-                {lang==="ko"
-                  ?`${selAirline?.name} 공식 홈페이지 및 최신 뉴스 검색 중…`
-                  :`Searching ${selAirline?.name} official site and latest news…`}
-              </p>
-            </div>
-          )}
-
-          {/* Error */}
-          {sel?.err&&!sel?.loading&&(
-            <div style={{margin:14,padding:12,borderRadius:10,background:C.redBg,border:`1px solid ${C.redBd}`,color:C.red,fontSize:13}}>⚠️ {sel.err}</div>
-          )}
-
-          {/* Data */}
-          {sel?.data&&!sel?.loading&&(()=>{
-            const d=sel.data;
-            return(
-              <div style={{padding:16,display:"flex",flexDirection:"column",gap:14}}>
-
-                {/* Conflict special policy — highlighted */}
-                {d.conflictPolicy&&(
-                  <div style={{display:"flex",gap:10,padding:"11px 14px",borderRadius:10,background:"#FFF7ED",border:`1.5px solid ${C.orgBd}`}}>
-                    <span style={{fontSize:18,flexShrink:0}}>🚨</span>
-                    <div>
-                      <p style={{fontSize:11,fontWeight:800,color:C.orange,margin:"0 0 4px",textTransform:"uppercase",letterSpacing:"0.06em"}}>
-                        {lang==="ko"?"중동 분쟁 특별 환불 조항":"Middle East Conflict — Special Policy"}
-                      </p>
-                      <p style={{fontSize:13,color:C.textSub,margin:0,lineHeight:1.65}}>{d.conflictPolicy}</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Two columns: eligibility + deadline/voucher */}
-                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-                  {d.eligibility?.length>0&&(
-                    <div style={{background:C.cardSub,border:`1px solid ${C.border}`,borderRadius:10,padding:12}}>
-                      <p style={{fontSize:11,fontWeight:800,color:C.text,margin:"0 0 8px",textTransform:"uppercase",letterSpacing:"0.06em"}}>
-                        {lang==="ko"?"환불 대상 조건":"Eligibility"}
-                      </p>
-                      {d.eligibility.map((e,i)=>(
-                        <div key={i} style={{display:"flex",gap:7,marginBottom:6,fontSize:12,color:C.textSub,lineHeight:1.55}}>
-                          <span style={{color:C.green,flexShrink:0,fontWeight:700}}>✓</span>{e}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  <div style={{display:"flex",flexDirection:"column",gap:8}}>
-                    {d.deadline&&(
-                      <div style={{background:C.yelBg,border:`1px solid ${C.yelBd}`,borderRadius:10,padding:12}}>
-                        <p style={{fontSize:11,fontWeight:800,color:C.yellow,margin:"0 0 4px",textTransform:"uppercase",letterSpacing:"0.06em"}}>⏰ {lang==="ko"?"신청 기한":"Deadline"}</p>
-                        <p style={{fontSize:12,color:C.textSub,margin:0,lineHeight:1.55}}>{d.deadline}</p>
-                      </div>
-                    )}
-                    {d.voucher&&(
-                      <div style={{background:C.purBg,border:`1px solid ${C.purBd}`,borderRadius:10,padding:12}}>
-                        <p style={{fontSize:11,fontWeight:800,color:C.purple,margin:"0 0 4px",textTransform:"uppercase",letterSpacing:"0.06em"}}>🎫 {lang==="ko"?"바우처/크레딧":"Voucher / Credit"}</p>
-                        <p style={{fontSize:12,color:C.textSub,margin:0,lineHeight:1.55}}>{d.voucher}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* How to refund — step by step */}
-                {d.howToRefund?.length>0&&(
-                  <div>
-                    <p style={{fontSize:11,fontWeight:800,color:C.text,margin:"0 0 10px",textTransform:"uppercase",letterSpacing:"0.06em"}}>
-                      📋 {lang==="ko"?"환불 신청 방법":"How to Request a Refund"}
-                    </p>
-                    <div style={{display:"flex",flexDirection:"column",gap:10}}>
-                      {d.howToRefund.map((m,i)=>(
-                        <div key={i} style={{background:C.cardSub,border:`1px solid ${C.border}`,borderRadius:10,padding:12}}>
-                          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginBottom:8,flexWrap:"wrap"}}>
-                            <div style={{display:"flex",alignItems:"center",gap:7}}>
-                              <span style={{width:22,height:22,borderRadius:"50%",background:C.accent,color:"#fff",fontSize:11,fontWeight:900,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{i+1}</span>
-                              <span style={{fontSize:13,fontWeight:800,color:C.text}}>{m.method}</span>
-                            </div>
-                            {m.time&&<span style={{fontSize:10,padding:"2px 8px",borderRadius:99,background:C.accentLight,color:C.accent,fontWeight:700}}>⏱ {m.time}</span>}
-                          </div>
-                          {m.steps?.length>0&&(
-                            <ol style={{margin:"0 0 8px 20px",padding:0}}>
-                              {m.steps.map((s,j)=>(
-                                <li key={j} style={{fontSize:12,color:C.textSub,lineHeight:1.6,marginBottom:3}}>{s}</li>
-                              ))}
-                            </ol>
-                          )}
-                          {m.url&&<a href={m.url} target="_blank" rel="noreferrer"
-                            style={{display:"inline-flex",alignItems:"center",gap:5,fontSize:11,color:C.accent,fontFamily:"monospace",wordBreak:"break-all"}}>
-                            🔗 {m.url}
-                          </a>}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Contact */}
-                {d.contact&&(d.contact.phone||d.contact.email||d.contact.chat)&&(
-                  <div style={{background:C.cardSub,border:`1px solid ${C.border}`,borderRadius:10,padding:12}}>
-                    <p style={{fontSize:11,fontWeight:800,color:C.text,margin:"0 0 8px",textTransform:"uppercase",letterSpacing:"0.06em"}}>
-                      📞 {lang==="ko"?"고객센터 연락처":"Contact"}
-                    </p>
-                    <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
-                      {d.contact.phone&&<span style={{fontSize:12,color:C.textSub}}>📞 {d.contact.phone}</span>}
-                      {d.contact.email&&<span style={{fontSize:12,color:C.textSub}}>✉️ {d.contact.email}</span>}
-                      {d.contact.chat&&<span style={{fontSize:12,color:C.textSub}}>💬 {d.contact.chat}</span>}
-                    </div>
-                  </div>
-                )}
-
-                {/* Pro tip */}
-                {d.tips&&(
-                  <div style={{display:"flex",gap:10,padding:"10px 13px",borderRadius:10,background:C.grnBg,border:`1px solid ${C.grnBd}`}}>
-                    <span style={{fontSize:16,flexShrink:0}}>💡</span>
-                    <p style={{fontSize:12,color:"#166534",margin:0,lineHeight:1.6,fontWeight:600}}>{d.tips}</p>
-                  </div>
-                )}
-
-                {/* Source */}
-                {d.sources?.length>0&&(
-                  <p style={{fontSize:10,color:C.textMuted,margin:0}}>
-                    {lang==="ko"?"출처":"Sources"}: {d.sources.join(" · ")}
-                  </p>
-                )}
-                {d.lastUpdated&&(
-                  <p style={{fontSize:10,color:C.textMuted,margin:0}}>
-                    {lang==="ko"?"정책 업데이트":"Policy updated"}: {d.lastUpdated}
-                  </p>
-                )}
-              </div>
-            );
-          })()}
-        </div>
-      )}
-
-      {/* Empty state */}
-      {!selected&&(
-        <div style={{background:C.card,border:`1px solid ${C.border}`,borderRadius:14,padding:"40px 20px",textAlign:"center",boxShadow:"0 2px 8px rgba(15,30,80,0.05)"}}>
-          <div style={{fontSize:40,marginBottom:10,opacity:0.15}}>💳</div>
-          <p style={{color:C.textSub,fontSize:13,margin:"0 0 6px",fontWeight:600}}>
-            {lang==="ko"?"위에서 항공사를 선택하세요":"Select an airline above"}
-          </p>
           <p style={{color:C.textMuted,fontSize:11,margin:0}}>
-            {lang==="ko"?"AI가 공식 홈페이지에서 최신 환불정책을 검색합니다":"AI will search the official website for the latest refund policy"}
+            {lang==="ko"?"3/9 기준 최신 웨이버 정책 안내":"Latest waiver policies as of Mar 9, 2026"}
           </p>
         </div>
       )}
@@ -640,13 +587,18 @@ function AltFlights({lang}){
   };
   const canSearch=from.trim().length===3&&to.trim().length===3;
 
-  // Static safe routing tips
+  // 3/9 기준 안전 경유지 가이드
   const TIPS=[
-    {icon:"✅",ko:"이스탄불(IST) 경유 — Turkish Airlines 정상 운항 중",en:"Via Istanbul (IST) — Turkish Airlines operating normally"},
-    {icon:"✅",ko:"도하(DOH) 경유 — Qatar Airways 정상 운항 중",en:"Via Doha (DOH) — Qatar Airways operating normally"},
-    {icon:"✅",ko:"방콕(BKK)/쿠알라룸푸르(KUL) 경유 — 동남아 우회 가능",en:"Via Bangkok (BKK)/KL (KUL) — Southeast Asia detour available"},
-    {icon:"⚠️",ko:"두바이(DXB)/아부다비(AUH) 경유 — 제한 운항, 출발 전 확인 필수",en:"Via Dubai (DXB)/Abu Dhabi (AUH) — limited ops, confirm before travel"},
-    {icon:"⛔",ko:"이란·이라크·이스라엘·예멘 영공 경유 항공편 회피",en:"Avoid routing over Iran, Iraq, Israel, Yemen airspace"},
+    {icon:"✅",ko:"이스탄불(IST) 경유 — Turkish Airlines 정상 운항. 중동 피해 노선 무료 변경 가능",en:"Via Istanbul (IST) — TK operating normally. Free changes for Middle East routes"},
+    {icon:"✅",ko:"무스카트(MCT) 경유 — Oman Air 정상 운항. 현재 중동 우회 핵심 거점. 좌석 수요 매우 높음",en:"Via Muscat (MCT) — Oman Air normal ops. Key bypass hub — very high seat demand"},
+    {icon:"✅",ko:"리야드(RUH) 경유 — Saudia 3/7 제한 운항 재개. 런던 등 장거리 환승 수요 급증",en:"Via Riyadh (RUH) — Saudia limited ops resumed Mar 7. High demand for long-haul transit"},
+    {icon:"✅",ko:"카이로(CAI) 경유 — 이집트 영공 이상 없음. EgyptAir 정상 운항 중",en:"Via Cairo (CAI) — Egyptian airspace unaffected. EgyptAir operating normally"},
+    {icon:"✅",ko:"방콕(BKK)·쿠알라룸푸르(KUL) 경유 — 동남아 우회 가능. Thai Airways 증편 중",en:"Via Bangkok (BKK)/KL (KUL) — SE Asia bypass available. Thai Airways adding capacity"},
+    {icon:"⚠️",ko:"두바이(DXB) 경유 — Emirates 60% 운항 재개. 공항 방문 전 반드시 항공사 확인",en:"Via Dubai (DXB) — Emirates ~60% resumed. MUST confirm with airline before going to airport"},
+    {icon:"⚠️",ko:"아부다비(AUH) 경유 — Etihad 3/9~12 선별 노선 운항. 환승은 양편 모두 확정 시에만",en:"Via Abu Dhabi (AUH) — Etihad select routes Mar 9–12. Transit only if BOTH flights confirmed"},
+    {icon:"⚠️",ko:"도하(DOH) 경유 — Qatar 3/7부터 제한 재개. 최신 편 확인 필수",en:"Via Doha (DOH) — Qatar limited ops from Mar 7. Check latest schedule before booking"},
+    {icon:"⛔",ko:"이란(OIIX)·이라크(ORBB) 영공 통과 노선 — 전면 폐쇄. 예약 전 항로 확인 필수",en:"Routes transiting Iran (OIIX)/Iraq (ORBB) airspace — FULLY CLOSED. Check routing before booking"},
+    {icon:"⛔",ko:"이스라엘(LLLL) 영공 — PPR(사전허가) 필요. 대부분 항공사 이스라엘 영공 우회 중",en:"Israeli (LLLL) airspace — PPR required. Most airlines diverting around Israeli airspace"},
   ];
 
   return(
@@ -759,14 +711,6 @@ export default function App(){
   const [tab,setTab]=useState("airlines");
   const [af,setAf]=useState("all");
   const [sf,setSf]=useState("all");
-  const [lastRefresh,setLastRefresh]=useState(null);
-  const [refreshing,setRefreshing]=useState(false);
-
-  const handleRefresh=useCallback(()=>{
-    setRefreshing(true);
-    setLastRefresh(new Date());
-    setTimeout(()=>setRefreshing(false),800);
-  },[]);
 
   const airlines=AIRLINES;
   const airspace=AIRSPACE;
@@ -789,7 +733,7 @@ export default function App(){
   ];
 
   return(
-    <div style={{minHeight:"100vh",background:C.pageBg,color:C.text,fontFamily:"'Noto Sans KR',system-ui,sans-serif"}}>
+    <div style={{minHeight:"100vh",background:C.pageBg,color:C.text,fontFamily:"'Noto Sans KR','system-ui',sans-serif"}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap');
         @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -827,23 +771,15 @@ export default function App(){
                 </button>
               ))}
             </div>
-            {/* Refresh button */}
-            <button onClick={handleRefresh} disabled={refreshing}
-              title={lang==="ko"?"전체 정보 새로고침":"Refresh all data"}
-              style={{display:"flex",alignItems:"center",gap:5,padding:"6px 11px",borderRadius:8,fontSize:12,fontWeight:700,background:refreshing?"rgba(255,255,255,0.08)":"rgba(255,255,255,0.15)",border:"1px solid rgba(255,255,255,0.25)",color:"#fff",cursor:refreshing?"not-allowed":"pointer",opacity:refreshing?0.7:1,transition:"all 0.2s",whiteSpace:"nowrap"}}>
-              <span style={refreshing?{display:"inline-block",animation:"spin 0.8s linear infinite"}:{display:"inline-block"}}>⟳</span>
-              <span style={{fontSize:11}}>{lang==="ko"?"새로고침":"Refresh"}</span>
-              {lastRefresh&&(
-                <span style={{fontSize:10,color:"rgba(255,255,255,0.55)",fontFamily:"monospace"}}>
-                  {lastRefresh.toLocaleTimeString(lang==="ko"?"ko-KR":"en-US",{hour:"2-digit",minute:"2-digit"})}
-                </span>
-              )}
-            </button>
+            {/* Update notice */}
+            <div style={{display:"flex",alignItems:"center",gap:5,padding:"6px 11px",borderRadius:8,fontSize:11,fontWeight:600,background:"rgba(255,255,255,0.10)",border:"1px solid rgba(255,255,255,0.2)",color:"rgba(255,255,255,0.75)",whiteSpace:"nowrap"}}>
+              🕐 {lang==="ko"?"매일 CET 기준 업데이트":"Updated daily CET"}
+            </div>
           </div>
         </div>
       </header>
 
-      <Ticker lang={lang} items={buildStaticTicker(lang)} loading={false} lastRefresh={lastRefresh}/>
+      <Ticker lang={lang} items={buildStaticTicker(lang)} loading={false}/>
 
       <main style={{maxWidth:1100,margin:"0 auto",padding:"22px 14px"}}>
         {/* Stats */}
