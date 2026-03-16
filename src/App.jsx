@@ -37,13 +37,13 @@ const ST = {
 };
 
 // ══ DATA ══════════════════════════════════════════════════════════════════════
-// ── 마지막 데이터 업데이트: 2026-03-13 ─────────────────────────────────────────
+// ── 마지막 데이터 업데이트: 2026-03-16 ─────────────────────────────────────────
 const AIRLINES = [
-  {code:"EK",name:"Emirates",            hub:"DXB",city:{ko:"두바이",    en:"Dubai"},     status:"주의", affected:true, note:{ko:"전쟁 전 60% 이상 운항 복구. 100% 복구 목표 유지. 환승은 연결편 확정 시에만 허용. 2/28~3/31 발권 → 4/30까지 무료 재예약 또는 환불.",en:"60%+ of pre-war capacity restored. Targeting 100% recovery. Transit only with confirmed connection. Feb 28–Mar 31 tickets free rebooking to Apr 30."}},
+  {code:"EK",name:"Emirates",            hub:"DXB",city:{ko:"두바이",    en:"Dubai"},     status:"중단", affected:true, note:{ko:"🚨 3/16 두바이 공항 연료탱크 드론 공격으로 DXB 재폐쇄. 일부 항공기 DWC로 우회 착륙. 확정 탑승권 없이 공항 절대 방문 금지. 2/28~3/31 발권 → 4/30까지 무료 재예약.",en:"🚨 Mar 16 drone struck fuel tank near DXB — airport closed again. Some flights diverting to DWC. Do NOT go to airport without confirmed booking. Feb 28–Mar 31 → free rebook to Apr 30."}},
   {code:"EY",name:"Etihad Airways",      hub:"AUH",city:{ko:"아부다비",  en:"Abu Dhabi"}, status:"주의", affected:true, note:{ko:"전쟁 전 대비 약 30% 운항. 3/13~15 급속 증편 진행 중. 2/28 이전 발권·3/21까지 여행 → 5/15까지 무료 재예약 또는 환불. 피싱 사기 주의.",en:"~30% of pre-war ops. Rapidly ramping up Mar 13–15. Tickets by Feb 28, travel to Mar 21 → free rebook to May 15 or refund. Beware phishing scams."}},
   {code:"FZ",name:"flydubai",            hub:"DXB",city:{ko:"두바이",    en:"Dubai"},     status:"주의", affected:true, note:{ko:"감편 운항 중. 바레인·쿠웨이트·도하·다맘 3/20까지, 이라크·레바논·이란 3/28까지 중단. 2/28~3/31 발권 → 30일 이내 동일 목적지 무료 재예약.",en:"Reduced schedule. Bahrain/Kuwait/Doha/Dammam suspended to Mar 20. Iraq/Lebanon/Iran to Mar 28. Feb 28–Mar 31 tickets → free rebook within 30 days same destination."}},
-  {code:"QR",name:"Qatar Airways",       hub:"DOH",city:{ko:"도하",      en:"Doha"},      status:"주의", affected:true, note:{ko:"36개 목적지 제한 운항 점진적 확대 중. 3/13 서울(ICN)·런던·방콕·KL·파리·암스테르담 등 출발. 2/28~3/28 발권 → 4/30까지 무료 변경 또는 환불.",en:"36 destinations gradually expanding. Mar 13 departures: Seoul(ICN), London, Bangkok, KL, Paris, Amsterdam etc. Feb 28–Mar 28 tickets → free change or refund to Apr 30."}},
-  {code:"WY",name:"Oman Air",            hub:"MCT",city:{ko:"무스카트",  en:"Muscat"},    status:"주의", affected:false,note:{ko:"무스카트 정상 운항. 단 암만·두바이·바레인·도하·다맘·쿠웨이트·코펜하겐·바그다드 3/22까지 취소. 중동 우회 핵심 거점.",en:"Muscat normal ops. BUT Amman/Dubai/Bahrain/Doha/Dammam/Kuwait/Copenhagen/Baghdad cancelled to Mar 22. Key bypass hub."}},
+  {code:"QR",name:"Qatar Airways",       hub:"DOH",city:{ko:"도하",      en:"Doha"},      status:"주의", affected:true, note:{ko:"제한 운항 점진적 확대. 3/16 무스카트·서울(ICN)·방콕·베이징·뭄바이·카이로·마이애미·콜롬보 등 출발. 2/28~3/28 발권 → 4/30까지 무료 변경 또는 환불.",en:"Limited ops expanding. Mar 16 departures: Muscat, Seoul(ICN), Bangkok, Beijing, Mumbai, Cairo, Miami, Colombo etc. Feb 28–Mar 28 tickets → free change or refund to Apr 30."}},
+  {code:"WY",name:"Oman Air",            hub:"MCT",city:{ko:"무스카트",  en:"Muscat"},    status:"주의", affected:false,note:{ko:"무스카트 정상 운항. 암만·두바이·바레인·도하·다맘·쿠웨이트·코펜하겐·바그다드 3/22까지 취소. SalamAir 3/16~27 카이로 추가편 운항.",en:"Muscat normal ops. Amman/Dubai/Bahrain/Doha/Dammam/Kuwait/Copenhagen/Baghdad cancelled to Mar 22. SalamAir extra Cairo flights Mar 16–27."}},
   {code:"SV",name:"Saudia",              hub:"RUH",city:{ko:"리야드",    en:"Riyadh"},    status:"주의", affected:true, note:{ko:"리야드·제다 운항 지속. 다맘發 런던·방콕·뭄바이 Gulf Air 대체편 운항. 리야드가 유럽행 우회 환승 거점으로 급부상.",en:"Riyadh & Jeddah ops continuing. Gulf Air operating Dammam→London/Bangkok/Mumbai. Riyadh emerging as key bypass hub for Europe."}},
   {code:"GF",name:"Gulf Air",            hub:"BAH",city:{ko:"바레인",    en:"Bahrain"},   status:"중단", affected:true, note:{ko:"바레인 영공 폐쇄 지속(3/13 13시 업데이트 예정). 항공기 다맘으로 재배치. 다맘發 런던·방콕·뭄바이 운항 중. 3/31까지 무료 변경, 3/21까지 무료 환불.",en:"Bahrain airspace still closed (update expected Mar 13 13:00). Aircraft repositioned to Dammam. Operating Dammam→London/Bangkok/Mumbai. Free rebook to Jun 15, refund to Mar 21."}},
   {code:"RJ",name:"Royal Jordanian",     hub:"AMM",city:{ko:"암만",      en:"Amman"},     status:"주의", affected:true, note:{ko:"두바이·바레인·도하·다맘·쿠웨이트·코펜하겐·바그다드 노선 취소 연장 중. 최신 일정 확인 필수.",en:"Dubai/Bahrain/Doha/Dammam/Kuwait/Copenhagen/Baghdad flights still cancelled. Check latest schedule directly."}},
@@ -55,11 +55,11 @@ const AIRLINES = [
   {code:"OZ",name:"Asiana Airlines",     hub:"ICN",city:{ko:"인천",      en:"Incheon"},   status:"주의", affected:true, note:{ko:"중동 노선 영향 지속. 환불 수수료 면제. 항공사 공식 채널에서 최신 일정 확인.",en:"Middle East routes still affected. Refund fee waived. Check official channels for latest schedule."}},
 ];
 const AIRSPACE = [
-  {country:{ko:"이란",          en:"Iran"},          status:"폐쇄",note:{ko:"민간 영공 전면 폐쇄 지속. OIIX/Tehran FIR 3/15 08:30 UTC까지 폐쇄. 재개 시점 미정.",        en:"Civilian airspace fully closed. OIIX/Tehran FIR closed until Mar 15 08:30 UTC. No reopening timeline."}},
-  {country:{ko:"이라크",        en:"Iraq"},          status:"폐쇄",note:{ko:"ORBB/Baghdad FIR 전면 폐쇄. 3/13 09:00 UTC 만료 후 재연장 예상. 지역 내 마지막으로 재개될 전망.",    en:"ORBB/Baghdad FIR fully closed. Expires Mar 13 09:00 UTC — expected to extend again. Last to reopen in region."}},
+  {country:{ko:"이란",          en:"Iran"},          status:"폐쇄",note:{ko:"민간 영공 전면 폐쇄 지속. OIIX/Tehran FIR 반복 연장 중. 재개 시점 미정.",        en:"Civilian airspace fully closed. OIIX/Tehran FIR repeatedly extended. No reopening timeline."}},
+  {country:{ko:"이라크",        en:"Iraq"},          status:"폐쇄",note:{ko:"ORBB/Baghdad FIR 전면 폐쇄. 3/16 09:00 UTC 만료 후 재연장 반복. 지역 내 마지막으로 재개될 전망.",    en:"ORBB/Baghdad FIR fully closed. Expires Mar 16 09:00 UTC — repeatedly extending. Last airspace to reopen in region."}},
   {country:{ko:"바레인·쿠웨이트",en:"Bahrain/Kuwait"},status:"폐쇄",note:{ko:"바레인(OBBB) 3/13 16:00 UTC 만료. 출발편 PPR 후 일부 허용으로 변경. 쿠웨이트(OKAC) 전면 폐쇄 유지. Gulf Air 다맘으로 재배치.",en:"Bahrain(OBBB) expires Mar 13 16:00 UTC — amended to allow PPR departures only. Kuwait(OKAC) still fully closed. Gulf Air repositioned to Dammam."}},
-  {country:{ko:"이스라엘",      en:"Israel"},        status:"제한",note:{ko:"LLLL/Tel Aviv FIR PPR 필요(3/16까지). 24시간 내 75편 출발·52편 도착 — 사실상 부분 운항 중. EASA 회피 권고.",en:"LLLL/Tel Aviv FIR PPR required (to Mar 16). 75 deps & 52 arrivals in last 24hrs — effectively partial ops. EASA advisory."}},
-  {country:{ko:"UAE",           en:"UAE"},           status:"제한",note:{ko:"OMAE FIR 부분 재개. 두바이·아부다비 지정 항로(waypoint corridor)로만 운항. 3/16까지 EST 적용.",      en:"OMAE FIR partial — only via tightly defined waypoint corridors. EST applies until Mar 16."}},
+  {country:{ko:"이스라엘",      en:"Israel"},        status:"제한",note:{ko:"LLLL/Tel Aviv FIR PPR 필요(3/16 10:00 UTC 만료). 사실상 부분 운항 지속. EASA 회피 권고.",en:"LLLL/Tel Aviv FIR PPR required (expires Mar 16 10:00 UTC). Effectively partial ops continuing. EASA avoidance advisory."}},
+  {country:{ko:"UAE",           en:"UAE"},           status:"폐쇄",note:{ko:"🚨 3/16 두바이 공항 연료탱크 드론 공격. DXB 재폐쇄. 일부 항공기 DWC 우회. ESCAT 재강화.",      en:"🚨 Mar 16 drone hit fuel tank near DXB — airport closed again. Flights diverting to DWC. ESCAT reinforced."}},
   {country:{ko:"카타르",        en:"Qatar"},         status:"제한",note:{ko:"OTDF/Doha FIR ESCAT 운용 중. 36개 목적지 점진적 재개. 사전 허가 후 운항 가능. 도하↔서울(ICN) 포함.",      en:"OTDF/Doha FIR operating ESCAT zones. 36 destinations gradually resuming with prior permission. Includes Doha↔Seoul(ICN)."}},
   {country:{ko:"시리아",        en:"Syria"},         status:"폐쇄",note:{ko:"OSTT/Damascus FIR 전면 폐쇄. 미·영·EU 운항 금지 NOTAM 발령.",                                    en:"OSTT/Damascus FIR fully closed. US, UK, EU operators prohibited by NOTAM."}},
   {country:{ko:"예멘",          en:"Yemen"},         status:"폐쇄",note:{ko:"영공 완전 폐쇄. 상업 항공편 없음.",                                                               en:"Airspace fully closed. No commercial flights."}},
@@ -67,10 +67,10 @@ const AIRSPACE = [
   {country:{ko:"레바논",        en:"Lebanon"},       status:"주의",note:{ko:"OLBB/Beirut FIR 개방 유지. 단 인근 분쟁으로 불안정. EASA 회피 권고 포함.",                         en:"OLBB/Beirut FIR open but unstable due to nearby conflict. Included in EASA advisory."}},
 ];
 const AIRPORTS = [
-  {iata:"DXB",name:{ko:"두바이 국제공항",          en:"Dubai International"},      city:{ko:"두바이",   en:"Dubai"},    status:"제한",airline:"Emirates / flydubai",
-   detail:{ko:"3/10 드론 공격으로 터미널 3 인근 연기·폭발. 일시 운항 중단 후 재개. Emirates 95개 목적지 운항 중. 확정 탑승권 없이 공항 방문 절대 금지.",en:"Mar 10 drone attack caused smoke/explosion near Terminal 3. Brief halt then resumed. Emirates serving 95 destinations. Do NOT go without confirmed booking."},
-   date:"2026-03-10",
-   warn:{ko:"항공사 공식 확인 없이 공항 방문 금지",en:"Do NOT go to airport without official airline confirmation"},site:"https://dubaiairports.ae"},
+  {iata:"DXB",name:{ko:"두바이 국제공항",          en:"Dubai International"},      city:{ko:"두바이",   en:"Dubai"},    status:"중단",airline:"Emirates / flydubai",
+   detail:{ko:"🚨 3/16 공항 연료탱크 드론 공격 — DXB 재폐쇄. 일부 항공기 DWC(두바이 월드센트럴)로 우회. 루프트한자 그룹 3/28까지 취소 연장. 확정 탑승권 없이 공항 방문 절대 금지.",en:"🚨 Mar 16 drone struck fuel tank near DXB — airport closed again. Flights diverting to DWC. Lufthansa Group cancelled to Mar 28. Do NOT go without confirmed booking."},
+   date:"2026-03-16",
+   warn:{ko:"🚨 3/16 드론 공격으로 DXB 재폐쇄 — 공항 방문 금지",en:"🚨 Mar 16 drone attack — DXB closed again, do NOT go to airport"},site:"https://dubaiairports.ae"},
   {iata:"AUH",name:{ko:"자이드 국제공항",          en:"Zayed International"},      city:{ko:"아부다비", en:"Abu Dhabi"},status:"제한",airline:"Etihad Airways",
    detail:{ko:"Etihad 3/13~15 급속 증편 진행 중(전쟁 전 약 30%). 2/28 이전 발권·3/21까지 여행 → 5/15까지 무료 재예약. 피싱 사기 주의 — 공식 채널만 이용. 40~60% 정상 용량 추정.",en:"Etihad rapidly ramping up Mar 13–15 (~30% of pre-war ops). Tickets by Feb 28, travel to Mar 21 → free rebook to May 15. Beware phishing scams. Est. 40–60% normal capacity."},
    date:"2026-03-13",
@@ -117,18 +117,18 @@ const US_ADVISORY=[
 ];
 // ── 최신 뉴스 데이터 (수동 업데이트) ─────────────────────────────────────────
 const STATIC_NEWS = [
-  {icon:"📢",tag:"Emirates",   severity:"high",  time:"3/13",content:"Emirates, 전쟁 전 60% 이상 운항 복구. 100% 목표 유지. 환승은 연결편 확정 시에만 허용. 2/28~3/31 발권 → 4/30까지 무료 재예약 또는 환불.",                    source:"emirates.com",    fresh:true},
-  {icon:"📢",tag:"Etihad",     severity:"high",  time:"3/13",content:"Etihad, 3/13~15 급속 증편 진행 중(전쟁 전 대비 약 30%). 2/28 이전 발권·3/21까지 여행 → 5/15까지 무료 재예약. 피싱 사기 주의 — 공식 채널만 이용.",             source:"etihad.com",      fresh:true},
-  {icon:"📢",tag:"Qatar",      severity:"high",  time:"3/13",content:"Qatar Airways, 3/13 서울(ICN)·런던·방콕·KL·파리·암스테르담 등 출발. 36개 목적지 점진적 확대. 2/28~3/28 발권 → 4/30까지 무료 변경 또는 환불.",                source:"qatarairways.com",fresh:true},
-  {icon:"🚨",tag:"Gulf Air",   severity:"high",  time:"3/13",content:"Gulf Air, 바레인 영공 폐쇄로 항공기 다맘(DMM)으로 재배치. 바레인 공항 인근 연기 목격. 다맘發 런던·방콕·뭄바이 운항 중. 3/13 13시 업데이트 예정.",             source:"Euronews/Reuters", fresh:true},
-  {icon:"⛔",tag:"이라크영공",  severity:"high",  time:"3/13",content:"이라크 영공(ORBB) 3/13 09:00 UTC 만료 후 재연장 예상. 지역 내 마지막으로 재개될 전망. 이라크 경유 전 노선 우회 필요.",                                       source:"ICAA/NOTAM",      fresh:true},
-  {icon:"⛔",tag:"이란영공",    severity:"high",  time:"3/13",content:"이란 영공(OIIX) 3/15 08:30 UTC까지 폐쇄. Iran Air 국제선 전면 중단 지속. 재개 시점 미정.",                                                              source:"NOTAM/FR24",      fresh:true},
-  {icon:"🚨",tag:"KLM",        severity:"medium",time:"3/12",content:"KLM, 두바이에 묶여있던 B787 3/12 빈 채로 네덜란드 귀환. 리야드·다맘 3/28까지 취소 연장. 승객 재배치는 외교부와 협조 중.",                                      source:"KLM newsroom",    fresh:true},
-  {icon:"📢",tag:"Turkish",    severity:"low",   time:"3/13",content:"Turkish Airlines, 바레인·이란·이라크·요르단·쿠웨이트·레바논·카타르·UAE 등 3/31까지 무료 변경 가능. 이스탄불(IST) 가장 안정적인 경유지.",                          source:"turkishairlines.com",fresh:true},
-  {icon:"✅",tag:"무스카트",   severity:"low",   time:"3/13",content:"무스카트(MCT) 중동 우회 핵심 거점 유지. Oman Air, 암만·두바이·바레인·도하 등 3/22까지 취소이나 무스카트 자체는 정상 운항.",                                     source:"Oman Air",        fresh:true},
-  {icon:"🚨",tag:"항공료급등",  severity:"medium",time:"3/10",content:"제트연료 $4.12/갤런 — 4년래 최고가. 항공사들 조용히 요금 인상 시작. 중동 우회로 비행시간 최대 2시간 증가, 여름 항공료 추가 인상 전망.",                          source:"TravelPirates",   fresh:false},
+  {icon:"🚨",tag:"두바이재폐쇄",severity:"high",  time:"3/16",content:"두바이 국제공항(DXB), 연료탱크 인근 드론 공격으로 3/16 새벽 재폐쇄. 일부 항공기 DWC(두바이 월드센트럴)로 우회 착륙. Emirates 대부분 편 중단. 확정 탑승권 없이 공항 방문 절대 금지.",source:"FR24/Emirates",   fresh:true},
+  {icon:"⛔",tag:"루프트한자",  severity:"high",  time:"3/16",content:"Lufthansa 그룹(LH·LX·OS·SN·ITA·EW), 두바이·아부다비·암만·에르빌 3/28까지 취소 연장. DXB 수용 능력 부족으로 공항 측 취소 요청. 전액 환불 또는 무료 재예약 가능.",          source:"lufthansa.com",   fresh:true},
+  {icon:"📢",tag:"Qatar",      severity:"high",  time:"3/16",content:"Qatar Airways, 3/16 서울(ICN)·방콕·베이징·뭄바이·카이로·마이애미·콜롬보·무스카트 등 출발. 3/17 서울(ICN)·방콕 포함 추가 일정 공개. 2/28~3/28 발권 → 4/30까지 무료 변경.",   source:"qatarairways.com",fresh:true},
+  {icon:"📢",tag:"Etihad",     severity:"high",  time:"3/16",content:"Etihad, 증편 지속 중. 2/28 이전 발권·3/21까지 여행 → 5/15까지 무료 재예약 또는 환불. 피싱 사기 주의 — etihad.com 공식 채널만 이용.",                              source:"etihad.com",      fresh:true},
+  {icon:"⛔",tag:"이라크영공",  severity:"high",  time:"3/16",content:"이라크 영공(ORBB) 3/16 09:00 UTC 만료 후 재연장 반복. 지역 내 마지막으로 재개될 전망. 이라크 경유 전 노선 우회 필요.",                                           source:"ICAA/NOTAM",      fresh:true},
+  {icon:"⛔",tag:"이란영공",    severity:"high",  time:"3/16",content:"이란 영공(OIIX) 반복 연장 중. Iran Air 국제선 전면 중단 지속. 재개 시점 미정.",                                                                         source:"NOTAM/FR24",      fresh:true},
+  {icon:"🚨",tag:"쿠웨이트공항",severity:"high",  time:"3/13",content:"쿠웨이트 국제공항 터미널 1 드론 공격. Kuwait Airways, 다맘 경유 육로 귀국편 운항. KU158D(이스탄불), KU542D(카이로), KU168D(파리) → 다맘 운항.",                   source:"The National",    fresh:true},
+  {icon:"✅",tag:"무스카트",   severity:"low",   time:"3/16",content:"무스카트(MCT) 중동 우회 핵심 거점 유지. 무스카트↔후자이라 증편 3/20까지 운항. SalamAir 3/16~27 카이로 추가편 운항.",                                           source:"Oman Air",        fresh:true},
+  {icon:"📢",tag:"Turkish",    severity:"low",   time:"3/13",content:"Turkish Airlines, 바레인·이란·이라크·요르단·쿠웨이트·레바논·카타르·UAE 등 3/31까지 무료 변경 가능. 이스탄불(IST) 현재 가장 안정적인 경유지.",                          source:"turkishairlines.com",fresh:false},
+  {icon:"📢",tag:"Gulf Air",   severity:"medium",time:"3/13",content:"Gulf Air, 바레인 영공 폐쇄로 항공기 다맘(DMM)으로 재배치. 다맘發 런던·방콕·뭄바이 운항 중. 3/31까지 무료 변경, 3/21까지 무료 환불.",                               source:"Gulf Air",        fresh:false},
   {icon:"✅",tag:"KE·OZ환불",  severity:"low",   time:"3/3", content:"대한항공·아시아나 중동 경유 노선 무료 변경·환불. 하나투어·모두투어 두바이·카이로 체류 한국인 약 540명 귀환 지원 완료.",                                         source:"Seoul Econ Daily",fresh:false},
-  {icon:"📢",tag:"Saudia",     severity:"medium",time:"3/7", content:"Saudia, 리야드·제다 운항 지속. Gulf Air와 협력해 다맘발 런던·방콕·뭄바이 편 운항. 리야드(RUH) 유럽행 우회 환승 거점으로 급부상.",                               source:"saudia.com",      fresh:false},
+  {icon:"🚨",tag:"항공료급등",  severity:"medium",time:"3/10",content:"제트연료 $4.12/갤런 — 4년래 최고가. 항공사들 조용히 요금 인상 시작. 중동 우회로 비행시간 최대 2시간 증가, 여름 항공료 추가 인상 전망.",                          source:"TravelPirates",   fresh:false},
 ];
 // Ticker static data builder
 function buildStaticTicker(lang) {
