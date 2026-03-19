@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 // ══ BRIGHT THEME ══════════════════════════════════════════════════════════════
 const C = {
@@ -190,6 +190,41 @@ function Ticker({lang, items, loading}){
     </div>
   );
 }
+// ══ SKYSCANNER WIDGET ══════════════════════════════════════════════════════════
+function SkyscannerWidget() {
+  const ref = useRef(null);
+  useEffect(() => {
+    // 위젯 스크립트가 이미 로드된 경우 재초기화
+    if (window.skyscanner && ref.current) {
+      try { window.skyscanner.init(); } catch(e) {}
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://widgets.skyscanner.net/widget-server/js/loader.js";
+    script.async = true;
+    script.onload = () => {
+      if (window.skyscanner && ref.current) {
+        try { window.skyscanner.init(); } catch(e) {}
+      }
+    };
+    document.body.appendChild(script);
+    return () => {};
+  }, []);
+  return (
+    <div style={{borderRadius:14,overflow:"hidden",boxShadow:"0 2px 12px rgba(15,30,80,0.10)",border:`1px solid ${C.border}`}}>
+      <div
+        ref={ref}
+        data-skyscanner-widget="FlightSearchWidget"
+        data-locale="ko-KR"
+        data-market="KR"
+        data-currency="KRW"
+        data-media-partner-id="7060490"
+      />
+    </div>
+  );
+}
+
+
 const LABEL={
   ko:{airline:{"운항중":"운항중","주의":"주의","중단":"중단"},airspace:{"정상":"정상","주의":"주의","제한":"제한","폐쇄":"폐쇄"},airport:{"운항중":"운항중","제한":"제한운항","주의":"주의","중단":"운항중단"},flight:{"정상운항":"정상운항","지연":"지연","취소":"취소","우회":"우회","정보없음":"정보없음"}},
   en:{airline:{"운항중":"Normal","주의":"Caution","중단":"Suspended"},airspace:{"정상":"Normal","주의":"Caution","제한":"Restricted","폐쇄":"Closed"},airport:{"운항중":"Operating","제한":"Restricted","주의":"Caution","중단":"Suspended"},flight:{"정상운항":"On Time","지연":"Delayed","취소":"Cancelled","우회":"Diverted","정보없음":"Unknown"}},
@@ -832,35 +867,8 @@ export default function App(){
 
         <Search lang={lang}/>
 
-        {/* Trip.com CPA Banner — lang-aware affiliate links */}
-        <a href={lang==="ko"?"https://3ha.in/r/387804":"https://3ha.in/r/387805"}
-          target="_blank" rel="noopener noreferrer"
-          style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,padding:"12px 18px",borderRadius:14,background:"linear-gradient(135deg,#1A56DB 0%,#0E3FA8 100%)",textDecoration:"none",boxShadow:"0 4px 16px rgba(26,86,219,0.25)",flexWrap:"wrap"}}
-          onMouseEnter={e=>e.currentTarget.style.opacity="0.92"}
-          onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
-          <div style={{display:"flex",alignItems:"center",gap:12}}>
-            <div style={{width:38,height:38,borderRadius:10,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>✈️</div>
-            <div>
-              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:2}}>
-                <span style={{fontSize:14,fontWeight:900,color:"#fff"}}>Trip.com</span>
-                <span style={{fontSize:9,padding:"2px 7px",borderRadius:99,background:"rgba(255,255,255,0.2)",color:"#fff",fontWeight:700,letterSpacing:"0.05em"}}>
-                  {lang==="ko"?"제휴 파트너":"Affiliate Partner"}
-                </span>
-              </div>
-              <span style={{fontSize:12,color:"rgba(255,255,255,0.85)"}}>
-                {lang==="ko"
-                  ?"우회 항공편·호텔 최저가 검색 — 중동 전 노선 실시간 조회"
-                  :"Search alternative flights & hotels — all Middle East routes live"}
-              </span>
-            </div>
-          </div>
-          <div style={{display:"flex",alignItems:"center",gap:6,padding:"8px 16px",borderRadius:9,background:"rgba(255,255,255,0.15)",border:"1.5px solid rgba(255,255,255,0.3)",flexShrink:0}}>
-            <span style={{fontSize:12,fontWeight:800,color:"#fff"}}>
-              {lang==="ko"?"항공편 검색하기":"Search Flights"}
-            </span>
-            <span style={{fontSize:14,color:"#fff"}}>↗</span>
-          </div>
-        </a>
+        {/* Skyscanner Flight Search Widget */}
+        <SkyscannerWidget />
 
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,340px),1fr))",gap:20}}>
           <div>
